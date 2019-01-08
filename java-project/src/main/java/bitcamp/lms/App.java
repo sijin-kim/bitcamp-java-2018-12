@@ -8,39 +8,57 @@ public class App {
     public static void main(String[] args) {
       
         Scanner key =new Scanner(System.in);
+        int room = 10 ;
+        int[] number=new int[room];
+        String[] className =new String[room]; 
+        String[] classContents =new String[room];
+        String[] start =new String[room];
+        String[] end =new String[room];
+        int[] totalClass =new int[room];
+        int[] totalDay =new int[room];
         
+          
+          int i=0;
+        
+          while(i<room) {
          System.out.print("번호? ");
-         int number =key.nextInt();
+         number[i] =key.nextInt();
           
          key.nextLine();
          
          System.out.print("수업명? ");
-          String className =key.nextLine();
+         className[i] =key.nextLine();
           
          System.out.print("수업내용? ");
-         String classContents =key.nextLine();
+         classContents[i] =key.nextLine();
          
          System.out.print("시작일? ");
-         String start =key.nextLine();
+         start[i] =key.nextLine();
          
          System.out.print("종료일? ");
-         String end =key.nextLine();
+         end[i] =key.nextLine();
          
          System.out.print("총수업시간? ");
-         int totalClass = key.nextInt();
+         totalClass[i] = key.nextInt();
          
          System.out.print("일수업시간? ");
-         int totalDay = key.nextInt();
+         totalDay[i] = key.nextInt();
          
-        
-         System.out.println(); // 빈 줄 출력
+         i++;
          
-         System.out.printf("번호: %d\n",number);
-         System.out.printf("수업명: %s\n",className);
-         System.out.printf("설명: %s\n",classContents);
-         System.out.printf("기간:%s\n",start );
-         System.out.printf("총수업시간: %d시간\n",totalClass);
-         System.out.printf("일수업시간: %d시간\n",totalDay);
+         System.out.println("계속입력하시겠습니까?(y/n)");
+           String use =key.next();
+         if(!use.equals("y") && use.equals("n")) {
+           break;
+         }
+          
+           System.out.println("");
+          
+          }
+          for (int j = 0; j < i; j++) {
+            System.out.printf("%d, %s, %s ~ %s, %d\n", 
+                number[j], className[j], start[j], end[j], totalClass[j]);
       
+    }
     }
 }

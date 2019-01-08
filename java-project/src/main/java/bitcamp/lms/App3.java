@@ -7,23 +7,37 @@ public class App3 {
     public static void main(String[] args) {
       
       Scanner key = new Scanner(System.in);
+      int room=10;
       
-      System.out.print("번호? ");
-      int number=key.nextInt();
-      
-      System.out.print("내용? ");
-      String contents= key.next();
-      
-      System.out.printf("번호: %d\n",number);
-      System.out.printf("내용: %s\n",contents);
-      System.out.println("작성일: 2019-01-01");
-      System.out.println("조회수: 0");
+      int[] number = new int[room];
+      String[] contents = new String[room];
       
       
       
       
+      int i=0;
+      while(i<room) {
+          System.out.print("번호");
+            number[i]=key.nextInt();
+            System.out.print("내용?");
+            contents[i]=key.next();
+            i++;
+            
+            System.out.println("계속입력하시겠습니까?(y/n)");
+            String use =key.next();
+          if(!use.equals("y") && use.equals("n")) {
+            break;
+      }
       
+      System.out.println("---------");
       
       
     }
+      for (int j = 0; j < i; j++) {
+      System.out.printf("%d,%s,%s,%s\n",number[j],contents[j]
+          ,"2019-01-01","0");
+      
+      
+}
+}
 }

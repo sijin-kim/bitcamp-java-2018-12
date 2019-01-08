@@ -15,7 +15,7 @@ public class Test08{
     
     
     System.out.print("이름 :");
-    String name =keyboard.nextLine();
+    String name =keyboard.next();
     System.out.printf("%d(%s)\n",age,name);
     
     
