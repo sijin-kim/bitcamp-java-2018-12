@@ -10,20 +10,17 @@ public class App3 {
       int room=10;
       
       int[] number = new int[room];
-      Board[] boards = new Board[room];
+      String[] contents = new String[room];
       
       
       
       
       int i=0;
       while(i<room) {
-        Board board =new Board(); 
-        
           System.out.print("번호");
-          board.number=key.nextInt();
+            number[i]=key.nextInt();
             System.out.print("내용?");
-            board.contents=key.next();
-            boards[i]=board;
+            contents[i]=key.next();
             i++;
             
             System.out.println("계속입력하시겠습니까?(y/n)");
@@ -37,8 +34,7 @@ public class App3 {
       
     }
       for (int j = 0; j < i; j++) {
-      System.out.printf("%d,%s,%s,%s\n",boards[j].number
-          ,boards[j].contents
+      System.out.printf("%d,%s,%s,%s\n",number[j],contents[j]
           ,"2019-01-01","0");
       
       
