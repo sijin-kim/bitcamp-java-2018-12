@@ -6,12 +6,17 @@ import com.eomcs.lms.domain.Board;
 
 public class BoardHandler {
   
-  public static Scanner keyboard;
+  public  Scanner keyboard;
   static final int LENGTH = 10;
    Board[] boards = new Board[LENGTH];
    int boardIdx = 0;
+                   
+   public BoardHandler(Scanner keyboard) {
+     this.keyboard = keyboard;
+   }
 
   public void listBoard() {
+                     //2               //3
     for (int j = 0; j < this.boardIdx; j++) {
       System.out.printf("%3d, %-20s, %s, %d\n", 
           this.boards[j].no, this.boards[j].contents, this.boards[j].createdDate, this.boards[j].viewCount);

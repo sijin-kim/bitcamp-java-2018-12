@@ -6,11 +6,15 @@ import com.eomcs.lms.domain.Member;
 
 public class MemberHandler {
   
-  public static Scanner keyboard;
-  static final int LENGTH = 10;
+  public  Scanner keyboard;
+  static final int LENGTH = 1000;
    Member[] members = new Member[LENGTH];
    int memberIdx = 0;
   
+   public MemberHandler(Scanner keyboard) {
+         this.keyboard=keyboard;
+   }
+   
   public  void listMember() {
     for (int j = 0; j < this.memberIdx; j++) {
       System.out.printf("%3d, %-4s, %-20s, %-15s, %s\n", 

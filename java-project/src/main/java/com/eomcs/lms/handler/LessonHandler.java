@@ -6,10 +6,18 @@ import com.eomcs.lms.domain.Lesson;
 
 public class LessonHandler {
 
-  public  static Scanner keyboard;
+  
+  public  Scanner keyboard;
+  
   final int LENGTH = 10;
    Lesson[] lessons = new Lesson[LENGTH];
    int lessonIdx = 0;
+   
+   public LessonHandler(Scanner keyboard) {
+       this.keyboard= keyboard;
+   }
+   
+   
   
   public  void listLesson() {
    

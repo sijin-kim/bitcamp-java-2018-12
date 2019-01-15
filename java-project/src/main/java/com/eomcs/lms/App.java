@@ -12,17 +12,14 @@ public class App {
   public static void main(String[] args) {
     
     // 외부로 분리한 클래스에서 사용할 keyboard를 주입한다.
-    LessonHandler lessonHandler = new LessonHandler();
-    lessonHandler.keyboard = keyboard;
+    LessonHandler lessonHandler = new LessonHandler(keyboard);
     
-    MemberHandler memberHandler = new MemberHandler();
-    memberHandler.keyboard = keyboard;
     
-    BoardHandler boardHandler1 = new BoardHandler();
-    boardHandler1.keyboard = keyboard;
+    MemberHandler memberHandler = new MemberHandler(keyboard);
     
-    BoardHandler boardHandler2 = new BoardHandler();
-    boardHandler2.keyboard = keyboard;
+    BoardHandler boardHandler1 = new BoardHandler(keyboard);
+    
+    BoardHandler boardHandler2 = new BoardHandler(keyboard);
    
 
     
