@@ -1,43 +1,55 @@
-// 인스턴스 필드와 초기화
+// 인스턴스 멤버 
 package ch10;
 
-class Monitor0{
-  int bright; //밝기 (0~100%)
-  int contratst; // 명암 (0~100%)
-  int widthRes; // 해상도 너비
-  int heightRes;// 해상도 높이
+class My2 {
+  //1) 인스턴스 필드
+  int a = 100;
   
-  void display() {
-    System.out.println("----------------------------------");
-    System.out.printf("밝기(%d)\n",this.bright);
-    System.out.printf("명암(%d)\n",this.contratst);
-    System.out.printf("해상도(%d x %d)\n",this.widthRes,this.heightRes);
-    System.out.println("----------------------------------");
-
+  //2) 인스턴스 블록
+  //=> 인스턴스 변수를 모두 생성하고, 초기화 문장까지 실행한 후 "인스턴스 블록"이 실행된다.
+  //=> 인스턴스 블록은 선언된 순서대로 실행된다.
+  //=> 인스턴스 블록도 인스턴스 메서드와 마찬가지로 인스턴스의 주소를 담고 있는 this 라는 변수가 
+  //   내장되어 있다. 
+  {
+    System.out.println("인스턴스 블록 실행! => a=" + this.a);
   }
   
+  {
+    System.out.println("여러 개의 인스턴스 블록을 가질 수 있다.");
+  }
+  
+  //3) 생성자
+  //=> 인스턴스 블록을 실행한 후 자동으로 호출된다.
+  //=> 생성자에도 인스턴스 주소를 담는 this라는 내장 변수가 있다.
+  My2() {
+    System.out.println("생성자 호출: a=" + this.a);
+  }
+  
+  //4) 인스턴스 메서드
+  //=> 인스턴스 레퍼런스를 통해 호출한다.
+  void m1() {
+    System.out.println("인스턴스 메서드: m1()");
+  }
 }
 
-   
 public class Test02 {
   public static void main(String[] args) {
-      //모니터 인스턴스 생성
-    Monitor1 m1= new Monitor1();
-     
-    m1.display();
-    //모니터의 중요 필드 값을 초기화시키지 않고 사용하면 제대로 동작이 안될수 있다.
-    
-    
-    //모니터 인스턴스 값 초기화시키기
-    m1.bright=50;
-    m1.contratst=50;
-    m1.widthRes=1920;
-    m1.bright=1080;
-    
-    
-
-    
-  
+    new My2();
   }
-  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

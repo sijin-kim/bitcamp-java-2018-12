@@ -1,30 +1,35 @@
-//메서드의 리턴값
+// 메서드 - 파라미터와 리턴 값
 package ch06;
 
-public class Test04{
-
-  public static void main(String[] args){
-      int i;
-//      i=m1();
-      String s;
-      s=m1();
-      System.out.println(s);
-      
-      i =m2();
-      System.out.println(i);
-      
-      
-        
-  }
-
-  
-  static String  m1() {
+public class Test04 {
+  public static void main(String[] args) {
+    String str = greet("홍길동");
+    System.out.println(str);
     
-    return "홍길동";
+    int result = plus(10, 20);
+    System.out.println(result);
   }
   
-  static int m2() {
-    return 100;
+  static String greet(String name) {
+    return name + "님 반갑습니다!";
   }
   
+  static int plus(int a, int b) {
+    return a + b;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,46 +1,51 @@
-// 생성자 -기본생성자
+// 생성자 - 기본 생성자(default constructor)
 package ch10;
-//초기화 문장
-//변수를 선언할 떄 값을 설정하는 것을 초기화 문장이라 부른다.
-class Monitor7{
-  int bright ; //밝기 (0~100%)
-  int contratst= 50; // 명암 (0~100%)Test04.java
-  int widthRes; // 해상도 너비
-  int heightRes = 1080;// 해상도 높이
-  
-  //클래스에 기본 생성자가 없으면 컴파일러 자동으로 기본 생성자를 추가한다.
-//   그래서 모든 클래스는 기본생성자가 있다.
-  
-  
-   public void on() {
-      System.out.println("화면을 출력한다.");
-   }
-  
-  void display() {
-    System.out.println("----------------------------------");
-    System.out.printf("밝기(%d)\n",this.bright);
-    System.out.printf("명암(%d)\n",this.contratst);
-    System.out.printf("해상도(%d x %d)\n",this.widthRes,this.heightRes);
-    System.out.println("----------------------------------");
 
-  }
+class Monitor7 {
+  int bright; // 밝기 (0% ~ 100%)
+  int contrast = 50; // 명암 (0% ~ 100%)
+  int widthRes; // 해상도 너비
+  int heightRes = 1080; // 해상도 높이
   
+  // 클래스에 기본 생성자가 없으면 컴파일러가 자동으로 다음의 기본 생성자를 추가한다.
+  // => 그래서 모든 클래스는 생성자가 반드시 한 개 이상 있다.
+  // 
+  //public Monitor7() {} // 공개된 기본 생성자 추가
+  
+  public void on() {
+    // 모니터를 켜면 bright, contrast, widthRes, heightRes 값에 맞춰서 
+    // LCD의 불을 밝힌다.
+    System.out.println("화면을 출력한다.");
+  }
 }
 
 public class Test09 {
-  
   public static void main(String[] args) {
-      //인스턴스 생성
+    // 인스턴스 생성
     
+    // 클래스에 기본 생성자가 없다고 해서 다음과 같이 인스턴스를 생성할 수는 없다.
+    //new Monitor7; // 컴파일 오류!
     
-     //new Monitor7();
-        
-    //기본 생성자가 있으니 인스턴스를 생성할 떄 호출될 기본 생성자를 표시해야한다.
-//      클래스 이름 뒤에 괄호를 쳐라!
+    // 기본 생성자가 있으니 인스턴스를 생성할 때 호출될 기본 생성자를 표시해야 한다.
+    // => 클래스 이름 뒤에 괄호를 쳐라!
+    //
+    new Monitor7(); // OK!
     
-    new Monitor7();
-     
-  
   }
-  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
