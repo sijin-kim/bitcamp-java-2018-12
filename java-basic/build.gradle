@@ -24,6 +24,7 @@ repositories {
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.7'
     implementation 'com.google.guava:guava:26.0-jre'
 
     // Use JUnit test framework
