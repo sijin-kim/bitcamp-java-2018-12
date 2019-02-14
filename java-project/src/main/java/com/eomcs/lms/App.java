@@ -2,12 +2,11 @@ package com.eomcs.lms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import com.eomcs.context.ApplicationContextListener;
+import com.eomcs.lms.context.ApplicationListener;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.Member;
@@ -27,50 +26,76 @@ import com.eomcs.lms.handler.MemberDeleteCommand;
 import com.eomcs.lms.handler.MemberDetailCommand;
 import com.eomcs.lms.handler.MemberListCommand;
 import com.eomcs.lms.handler.MemberUpdateCommand;
+import com.eomcs.lms.listener.BoardDataLoaderListener;
+import com.eomcs.lms.listener.LessonDataLoaderListener;
+import com.eomcs.lms.listener.MemberDataLoaderListener;
 
 public class App {
-  
-  // Observer를 보관할 저장소
-  ArrayList<ApplicationContextListener> applicationContextListeners = new ArrayList<>();
 
-  // Observer와 서로 공유할 값을 저장하는 보관소
-  Map<String,Object> context = new HashMap<>();
+  // 애플리케이션의 상태 변경을 보고 받을 옵저버 목록
+  static ArrayList<ApplicationListener> observers = new ArrayList<>();
   
-  Scanner keyboard = new Scanner(System.in);
-  Stack<String> commandHistory = new Stack<>();
-  Queue<String> commandHistory2 = new LinkedList<>();
+  // 애플리케이션에서 사용할 객체를 보관하는 보관소 
+  static HashMap<String,Object> context = new HashMap<>();
+  
+  static {
+    // 애플리케이션에서 사용할 객체를 준비하여 보관소에 저장한다.
+    context.put("keyboard", new Scanner(System.in));
+    context.put("commandHistory", new Stack<String>());
+    context.put("commandHistory2", new LinkedList<String>());
+    context.put("lessonList", new ArrayList<Lesson>());
+    context.put("memberList", new LinkedList<Member>());
+    context.put("boardList", new ArrayList<Board>());
+  }
+  
+  static void addApplicationListener(ApplicationListener listener) {
+    observers.add(listener);
+  }
   
   @SuppressWarnings("unchecked")
-  public void service() {
+  public static void main(String[] args) {
+    // 애플리케이션의 상태가 변경되었을 때 보고 받을 리스너(옵저버)를 등록한다.
+    addApplicationListener(new BoardDataLoaderListener());
+    addApplicationListener(new MemberDataLoaderListener());
+    addApplicationListener(new LessonDataLoaderListener());
     
-    // 서비스를 실행하기 전에 등록된 모든 Observer를 호출하여 시작을 알린다.
-    for (ApplicationContextListener listener : applicationContextListeners) {
-      listener.contextInitialized(context);
+    // 애플리케이션이 시작될 때 등록된 리스너(옵저버)에게 보고한다.
+    for (ApplicationListener observer : observers) {
+      try {
+        observer.startApplication(context);
+      } catch (Exception e) {}
     }
-    
-    Map<String,Command> commandMap = new HashMap<>();
 
-    // 핸들러가 사용할 데이터는 context에서 꺼내 준다.
-    List<Lesson> lessonList = (List<Lesson>) context.get("lessonList");
+    Scanner keyboard = (Scanner) context.get("keyboard");
+    ArrayList<Lesson> lessonList = 
+        (ArrayList<Lesson>) context.get("lessonList"); 
+    Map<String,Command> commandMap = new HashMap<>();
     commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessonList));
     commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonList));
     commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonList));
     commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard, lessonList));
     commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard, lessonList));
 
-    List<Member> memberList = (List<Member>) context.get("memberList");
+    LinkedList<Member> memberList = 
+        (LinkedList<Member>) context.get("memberList");
     commandMap.put("/member/add", new MemberAddCommand(keyboard, memberList));
     commandMap.put("/member/list", new MemberListCommand(keyboard, memberList));
     commandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberList));
     commandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberList));
     commandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberList));
     
-    List<Board> boardList = (List<Board>) context.get("boardList");
+    ArrayList<Board> boardList = 
+        (ArrayList<Board>) context.get("boardList");
     commandMap.put("/board/add", new BoardAddCommand(keyboard, boardList));
     commandMap.put("/board/list", new BoardListCommand(keyboard, boardList));
     commandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardList));
     commandMap.put("/board/update", new BoardUpdateCommand(keyboard, boardList));
     commandMap.put("/board/delete", new BoardDeleteCommand(keyboard, boardList));
+    
+    Stack<String> commandHistory = 
+        (Stack<String>) context.get("commandHistory");
+    Queue<String> commandHistory2 = 
+        (Queue<String>) context.get("commandHistory2");
     
     while (true) {
       String command = prompt();
@@ -109,14 +134,18 @@ public class App {
 
     keyboard.close();
     
-    // 서비스를 종료하기 전에 등록된 모든 Observer를 호출하여 종료를 알린다.
-    for (ApplicationContextListener listener : applicationContextListeners) {
-      listener.contextDestroyed(context);
+    // 애플리케이션이 종료될 때 다시 등록된 리스너(옵저버)를 꺼내 보고한다.
+    for (ApplicationListener observer : observers) {
+      try {
+        observer.endApplication(context);
+      } catch (Exception e) {}
     }
   }
-  
+
   @SuppressWarnings("unchecked")
-  private void printCommandHistory() {
+  private static void printCommandHistory() {
+    Stack<String> commandHistory = 
+        (Stack<String>) context.get("commandHistory");
     Stack<String> temp = (Stack<String>) commandHistory.clone();
     
     while (temp.size() > 0) {
@@ -125,7 +154,9 @@ public class App {
   }
   
   @SuppressWarnings("unchecked")
-  private void printCommandHistory2() {
+  private static void printCommandHistory2() {
+    Queue<String> commandHistory2 = 
+        (Queue<String>) context.get("commandHistory2");
     Queue<String> temp = (Queue<String>) ((LinkedList<String>) commandHistory2).clone();
     
     while (temp.size() > 0) {
@@ -133,23 +164,11 @@ public class App {
     }
   }
 
-  private String prompt() {
+  private static String prompt() {
+    Scanner keyboard = (Scanner) context.get("keyboard");
     System.out.print("명령> ");
     return keyboard.nextLine().toLowerCase();
   }
   
-  // Observer를 등록하는 메서드
-  private void addApplicationContextListener(ApplicationContextListener listener) {
-    applicationContextListeners.add(listener);
-  }
-  
-  public static void main(String[] args) {
-    App app = new App();
-    
-    // App 객체에 Observer를 등록한다.
-    app.addApplicationContextListener(new DataLoaderListener());
-    
-    // App 을 실행한다.
-    app.service();
-  }
+
 }

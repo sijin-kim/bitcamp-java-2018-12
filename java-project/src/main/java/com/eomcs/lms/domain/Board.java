@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Board implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
-
+  
   private int no;
   private String contents;
   private Date createdDate;
