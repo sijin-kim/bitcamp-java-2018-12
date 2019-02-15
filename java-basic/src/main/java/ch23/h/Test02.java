@@ -15,22 +15,12 @@ public class Test02 {
     
     // 자바에서 URL을 저장하기
     URL url = new URL("http://www.bitcamp.co.kr:80/a/b/c/index.html#side");
-    URL url1 = new URL("http://www.bitcamp.co.kr/b/c/d/index.html#sim");
     
     System.out.printf("프로토콜: %s\n", url.getProtocol());
     System.out.printf("서버주소: %s\n", url.getHost());
     System.out.printf("포트번호: %d\n", url.getPort()); // 포트번호를 생략하면 -1을 리턴한다.
     System.out.printf("자원경로: %s\n", url.getPath());
     System.out.printf("내부위치: %s\n", url.getRef()); // => side
-    
-    System.out.println("--------------------------------");
-    System.out.printf("프로토콜 :%s\n" , url1.getProtocol());
-    System.out.printf("서버주소:%s\n", url1.getHost());
-    System.out.printf("포트번호:%d\n",url1.getPort());
-    System.out.printf("자원경로: %s\n",url1.getPath());
-    System.out.printf("내부위치:%s\n",url1.getRef());
-    
-    
   }
 
 }

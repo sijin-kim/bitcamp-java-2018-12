@@ -10,58 +10,43 @@ public class BoardDao extends AbstractDao<Board> {
     this.filepath = filepath;
   }
   
-
-
-  public void insert(Board board) {
+  public void insert(Board board) throws Exception {
     list.add(board);
+    this.saveData();
   }
-  
-  
-  public List<Board> findAll(){
+
+  public List<Board> findAll() {
     return list;
   }
-  
-//  // detail
-//  public Board findByNo(int no) {
-//    for (Board obj : list) {
-//      if (obj.getNo() == no) {
-//        return obj;
-//      }
-//    }
-//    return null;
-//  }
-  
-          
+
   public Board findByNo(int no) {
-    for(Board aa:list) {
-      if(aa.getNo()==no) {
-        
-        return aa;s
+    for (Board obj : list) {
+      if (obj.getNo() == no) {
+        return obj;
       }
-      
     }
     return null;
   }
- 
-  
-// 업데이트
-  public int update(Board board) {
+
+  public int update(Board board) throws Exception {
     int index = 0;
     for (Board obj : list) {
       if (obj.getNo() == board.getNo()) {
         list.set(index, board);
+        this.saveData();
         return 1;
       }
       index++;
     }
     return 0;
   }
- // delete
-  public int delete(int no) {
+
+  public int delete(int no) throws Exception {
     int index = 0;
     for (Board obj : list) {
       if (obj.getNo() == no) {
         list.remove(index);
+        this.saveData();
         return 1;
       }
       index++;

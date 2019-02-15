@@ -15,17 +15,12 @@ Stateful 응용
 public class CalculatorClient2 {
   public static void main(String[] args) {
     
-    
     Scanner keyboard = new Scanner(System.in);
 
     // 계산 요청을 할 때 연산자와 값만 넘긴다.
     // 예) + 2
     // 예) / 3
     // 
-    
-    
-    long sessionId=0; // 서버에서 클라이언트를 구분할떄 사용하는 값
-    
     try (Socket socket = new Socket("localhost", 8888);
         PrintStream out = new PrintStream(socket.getOutputStream());
         BufferedReader in = new BufferedReader(
@@ -36,7 +31,7 @@ public class CalculatorClient2 {
       while (true) {
         System.out.print("> ");
         String input = keyboard.nextLine();
-        out.println(sessionId); //서버에게 클라이언트 세션아이디를 보낸다
+
         out.println(input);
         out.flush();
         
@@ -44,11 +39,6 @@ public class CalculatorClient2 {
 
         String response = in.readLine();
         System.out.println(response);
-        
-         if(sessionId==0) {
-           sessionId=Long.parseLong(in.readLine());
-           System.out.printf("받은 세션 아이디는 %d\n",sessionId);
-         }
 
         if (input.equalsIgnoreCase("quit"))
           break;

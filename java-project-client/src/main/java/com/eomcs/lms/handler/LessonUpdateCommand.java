@@ -1,6 +1,4 @@
 package com.eomcs.lms.handler;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.Scanner;
 import com.eomcs.lms.agent.LessonAgent;
@@ -9,18 +7,21 @@ import com.eomcs.lms.domain.Lesson;
 public class LessonUpdateCommand implements Command {
 
   Scanner keyboard;
-
-  public LessonUpdateCommand(Scanner keyboard) {
+  LessonAgent lessonAgent;
+  
+  public LessonUpdateCommand(Scanner keyboard, LessonAgent lessonAgent) {
     this.keyboard = keyboard;
+    this.lessonAgent = lessonAgent;
   }
+  
 
   @Override
-  public void execute(ObjectInputStream in, ObjectOutputStream out) {
+  public void execute() {
     System.out.print("번호? ");
     int no = Integer.parseInt(keyboard.nextLine());
 
     try {
-      Lesson lesson = LessonAgent.get(no, in, out);
+      Lesson lesson = lessonAgent.get(no);
     
       Lesson temp = lesson.clone();
       
@@ -49,7 +50,7 @@ public class LessonUpdateCommand implements Command {
       if ((input = keyboard.nextLine()).length() > 0)
         temp.setDayHours(Integer.parseInt(input));
       
-      LessonAgent.update(temp, in, out);
+      lessonAgent.update(temp);
       System.out.println("변경했습니다.");
       
     } catch (Exception e) {

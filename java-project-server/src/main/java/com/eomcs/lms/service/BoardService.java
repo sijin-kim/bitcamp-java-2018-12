@@ -9,7 +9,6 @@ public class BoardService implements Service {
 
   // BoardService가 작업을 수행할 때 사용할 객체(의존 객체; dependency)
   BoardDao boardDao;
- 
   
   public BoardService(BoardDao boardDao) {
     this.boardDao = boardDao;
@@ -58,8 +57,8 @@ public class BoardService implements Service {
     out.flush();
     int no = in.readInt();
 
-    Board aa = boardDao.findByNo(no);
-    if (aa == null) { 
+    Board obj = boardDao.findByNo(no);
+    if (obj == null) { 
       out.writeUTF("FAIL");
       return;
     }
