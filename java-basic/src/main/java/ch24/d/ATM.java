@@ -1,15 +1,14 @@
 package ch24.d;
 
 public class ATM extends Thread {
-  String name;
+  
   Account account;
   
   public ATM(String name, Account account) {
-    this.name=name;
+    super(name);
     this.account = account;
   }
   
-  @Override
   public void run() {
     double sum = 0;
     while (true) {
@@ -20,7 +19,7 @@ public class ATM extends Thread {
       
       sum += money;
     }
-    System.out.printf("%s 에서 찾은 금액 합계: %.2f\n", name, sum);
+    System.out.printf("%s 에서 찾은 금액 합계: %.2f\n", this.getName(), sum);
   }
 }
 

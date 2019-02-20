@@ -26,6 +26,8 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.7'
     implementation 'com.google.guava:guava:26.0-jre'
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.0'
+    
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
