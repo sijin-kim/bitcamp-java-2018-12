@@ -1,7 +1,4 @@
-// 16단계: DAO에 JDBC 적용하기
-// => 현재 프로젝트에 mariadb JDBC 드라이버를 추가한다.
-// => 수업(Lesson), 회원(Member), 게시물(Board) 정보를 저장할 테이블을 생성한다.
-// => BoardDaoImpl, MemberDaoImpl, LessonDaoImpl 클래스에 JDBC 를 적용한다.
+// 16단계 : jdbc드라이브 연결
 package com.eomcs.lms;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,9 +6,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import com.eomcs.lms.dao.BoardDaoImpl;
-import com.eomcs.lms.dao.LessonDaoImpl;
-import com.eomcs.lms.dao.MemberDaoImpl;
+import com.eomcs.lms.dao.mariadb.BoardMariadbimpl;
+import com.eomcs.lms.dao.mariadb.LessonMariadbimpl;
+import com.eomcs.lms.dao.mariadb.MemberMariadbimpl;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
 import com.eomcs.lms.handler.BoardDetailCommand;
@@ -39,21 +36,21 @@ public class App {
 
     Map<String,Command> commandMap = new HashMap<>();
 
-    LessonDaoImpl lessonDao = new LessonDaoImpl();
+    LessonMariadbimpl lessonDao = new LessonMariadbimpl("192.168.0.31", 8888, "/lesson");
     commandMap.put("/lesson/add", new LessonAddCommand(keyboard, lessonDao));
     commandMap.put("/lesson/list", new LessonListCommand(keyboard, lessonDao));
     commandMap.put("/lesson/detail", new LessonDetailCommand(keyboard, lessonDao));
     commandMap.put("/lesson/update", new LessonUpdateCommand(keyboard, lessonDao));
     commandMap.put("/lesson/delete", new LessonDeleteCommand(keyboard, lessonDao));
 
-    MemberDaoImpl memberDao = new MemberDaoImpl();
+    MemberMariadbimpl memberDao = new MemberMariadbimpl("192.168.0.31", 8888, "/member");
     commandMap.put("/member/add", new MemberAddCommand(keyboard, memberDao));
     commandMap.put("/member/list", new MemberListCommand(keyboard, memberDao));
     commandMap.put("/member/detail", new MemberDetailCommand(keyboard, memberDao));
     commandMap.put("/member/update", new MemberUpdateCommand(keyboard, memberDao));
     commandMap.put("/member/delete", new MemberDeleteCommand(keyboard, memberDao));
 
-    BoardDaoImpl boardDao = new BoardDaoImpl();
+    BoardMariadbimpl boardDao = new BoardMariadbimpl();
     commandMap.put("/board/add", new BoardAddCommand(keyboard, boardDao));
     commandMap.put("/board/list", new BoardListCommand(keyboard, boardDao));
     commandMap.put("/board/detail", new BoardDetailCommand(keyboard, boardDao));

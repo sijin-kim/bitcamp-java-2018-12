@@ -83,7 +83,6 @@ public class ServerApp {
         //    새로 스레드를 생성하여 일을 맡긴다.
         // => 물론 스레드의 작업이 끝났으면 스레드는 다시 풀에 반납된다.
         //
-       
         executorService.submit(new RequestHandler(serverSocket.accept()));
         
       }
