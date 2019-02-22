@@ -1,4 +1,4 @@
-// 7단계: 클라이언트에서 요청한 /board/* 명령을 처리한다.
+// 8단계: 클라이언트 요청을 처리하는 클래스에 대해 리팩토링 수행
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;
@@ -6,21 +6,21 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import com.eomcs.lms.domain.Board;
 
-//클라이언트의 요청을 처리하는 클래스라는의미로
-
+// 클라이언트의 요청을 처리하는 클래스라는 의미로 
+// 클래스명을 *Service로 변경한다.
 public class BoardService {
 
-   ArrayList<Board> boards = new ArrayList<>();
+  ArrayList<Board> boards = new ArrayList<>();
 
-   ObjectInputStream in;
-   ObjectOutputStream out;
-   
-   public BoardService(ObjectInputStream in,ObjectOutputStream out) {
-     this.in=in;
-     this.out=out;
-   }
+  ObjectInputStream in;
+  ObjectOutputStream out;
 
-  public  void execute(String request) throws Exception {
+  public BoardService(ObjectInputStream in, ObjectOutputStream out) {
+    this.in = in;
+    this.out = out;
+  }
+  
+  public void execute(String request) throws Exception {
 
     switch (request) {
       case "/board/add":
@@ -51,7 +51,7 @@ public class BoardService {
     out.writeUTF("OK");
   }
 
-  private  void list() throws Exception {
+  private void list() throws Exception {
     out.writeUTF("OK");
     out.flush();
     out.writeUTF("OK");
@@ -63,10 +63,10 @@ public class BoardService {
     out.flush();
     int no = in.readInt();
 
-    for (Board m : boards) {
-      if (m.getNo() == no) {
+    for (Board b : boards) {
+      if (b.getNo() == no) {
         out.writeUTF("OK");
-        out.writeObject(m);
+        out.writeObject(b);
         return;
       }
     }
@@ -80,8 +80,8 @@ public class BoardService {
     Board board = (Board) in.readObject();
 
     int index = 0;
-    for (Board m : boards) {
-      if (m.getNo() == board.getNo()) {
+    for (Board b : boards) {
+      if (b.getNo() == board.getNo()) {
         boards.set(index, board);
         out.writeUTF("OK");
         return;
@@ -98,8 +98,8 @@ public class BoardService {
     int no = in.readInt();
 
     int index = 0;
-    for (Board m : boards) {
-      if (m.getNo() == no) {
+    for (Board b : boards) {
+      if (b.getNo() == no) {
         boards.remove(index);
         out.writeUTF("OK");
         return;

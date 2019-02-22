@@ -24,7 +24,6 @@ public class BoardService {
     this.out = out;
   }
   
-  
   @SuppressWarnings("unchecked")
   public void loadData(String filepath) {
     this.filepath = filepath;

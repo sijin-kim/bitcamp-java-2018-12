@@ -1,4 +1,4 @@
-// 7단계: 클라이언트에서 요청한 /lesson/* 명령을 처리한다.
+// 8단계: 클라이언트 요청을 처리하는 클래스에 대해 리팩토링 수행
 package com.eomcs.lms.service;
 
 import java.io.ObjectInputStream;
@@ -6,19 +6,21 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import com.eomcs.lms.domain.Lesson;
 
+//클라이언트의 요청을 처리하는 클래스라는 의미로 
+//클래스명을 *Service로 변경한다.
 public class LessonService {
 
-   ArrayList<Lesson> lessons = new ArrayList<>();
+  ArrayList<Lesson> lessons = new ArrayList<>();
 
-   ObjectInputStream in;
-   ObjectOutputStream out;
+  ObjectInputStream in;
+  ObjectOutputStream out;
 
-   public LessonService(ObjectInputStream in,ObjectOutputStream out) {
-     this.in=in;
-     this.out=out;
-   }
-   
-  public  void execute(String request) throws Exception {
+  public LessonService(ObjectInputStream in, ObjectOutputStream out) {
+    this.in = in;
+    this.out = out;
+  }
+  
+  public void execute(String request) throws Exception {
 
     switch (request) {
       case "/lesson/add":
@@ -61,10 +63,10 @@ public class LessonService {
     out.flush();
     int no = in.readInt();
 
-    for (Lesson m : lessons) {
-      if (m.getNo() == no) {
+    for (Lesson l : lessons) {
+      if (l.getNo() == no) {
         out.writeUTF("OK");
-        out.writeObject(m);
+        out.writeObject(l);
         return;
       }
     }
@@ -78,8 +80,8 @@ public class LessonService {
     Lesson lesson = (Lesson) in.readObject();
 
     int index = 0;
-    for (Lesson m : lessons) {
-      if (m.getNo() == lesson.getNo()) {
+    for (Lesson l : lessons) {
+      if (l.getNo() == lesson.getNo()) {
         lessons.set(index, lesson);
         out.writeUTF("OK");
         return;
@@ -96,8 +98,8 @@ public class LessonService {
     int no = in.readInt();
 
     int index = 0;
-    for (Lesson m : lessons) {
-      if (m.getNo() == no) {
+    for (Lesson l : lessons) {
+      if (l.getNo() == no) {
         lessons.remove(index);
         out.writeUTF("OK");
         return;

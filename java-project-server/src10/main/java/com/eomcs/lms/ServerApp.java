@@ -36,17 +36,15 @@ public class ServerApp {
         memberService.loadData("member.bin");
       } catch (Exception e) {
         System.out.println("회원 데이터 로딩 중 오류 발생!");
-      //  e.printStackTrace();
+        //e.printStackTrace();
       }
       
       try {
         lessonService = new LessonService();
         lessonService.loadData("lesson.bin");
-
-        
       } catch (Exception e) {
         System.out.println("수업 데이터 로딩 중 오류 발생!");
-      //  e.printStackTrace();
+        //e.printStackTrace();
       }
       
       try {
@@ -55,7 +53,7 @@ public class ServerApp {
         
       } catch (Exception e) {
         System.out.println("게시물 데이터 로딩 중 오류 발생!");
-     //   e.printStackTrace();
+        //e.printStackTrace();
       }
       
       while (true) {
@@ -66,7 +64,6 @@ public class ServerApp {
           boardService.init(in, out);
           memberService.init(in, out);
           lessonService.init(in, out);
-
           
           System.out.println("클라이언트와 연결되었음.");
           members.clear();
@@ -109,27 +106,24 @@ public class ServerApp {
   static void quit() throws Exception {
     try {
       boardService.saveData();
-    
     } catch (Exception e) {
       System.out.println(e.getMessage());
-   //   e.printStackTrace();
+      //e.printStackTrace();
     }
+    
     try {
-     
       memberService.saveData();
-      
     } catch (Exception e) {
       System.out.println(e.getMessage());
-   //   e.printStackTrace();
+      //e.printStackTrace();
     }
-    try {
     
+    try {
       lessonService.saveData();
     } catch (Exception e) {
       System.out.println(e.getMessage());
-   //   e.printStackTrace();
+      //e.printStackTrace();
     }
-    
     out.writeUTF("종료함!");
     out.flush();
   }

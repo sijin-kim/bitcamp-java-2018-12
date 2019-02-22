@@ -1,4 +1,4 @@
-// 7단계: 서버 실행 테스트
+// 8단계: 서버 실행 테스트
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;

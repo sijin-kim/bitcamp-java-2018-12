@@ -1,4 +1,4 @@
-// 7단계: 클라이언트에서 요청한 /member/* 명령을 처리한다.
+// 8단계: 클라이언트 요청을 처리하는 클래스에 대해 리팩토링 수행
 package com.eomcs.lms.service;
 
 import java.io.ObjectInputStream;
@@ -6,19 +6,21 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import com.eomcs.lms.domain.Member;
 
+//클라이언트의 요청을 처리하는 클래스라는 의미로 
+//클래스명을 *Service로 변경한다.
 public class MemberService {
 
-   ArrayList<Member> members = new ArrayList<>();
+  ArrayList<Member> members = new ArrayList<>();
 
-   ObjectInputStream in;
-   ObjectOutputStream out;
-   
-   public MemberService(ObjectInputStream in,ObjectOutputStream out) {
-     this.in=in;
-     this.out=out;
-   }
+  ObjectInputStream in;
+  ObjectOutputStream out;
 
-  public  void execute(String request) throws Exception {
+  public MemberService(ObjectInputStream in, ObjectOutputStream out) {
+    this.in = in;
+    this.out = out;
+  }
+  
+  public void execute(String request) throws Exception {
 
     switch (request) {
       case "/member/add":

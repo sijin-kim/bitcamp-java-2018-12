@@ -17,7 +17,7 @@ day_hr int not null comment '일 수업시간',
 titl varchar(255) not null comment '수업명',
 conts text not null comment '수업 내용'
 ) comment '수업';
-
+sadasd
 create table lms_member(
 member_id int not null auto_increment primary key comment'회원데이터 식별번호',
 name varchar(30) not null comment '이름',
