@@ -1,4 +1,4 @@
-# select 테스트 용 데이터 준비
+
 
 /* 강의실 데이터 준비 */
 insert into room(rno, loc, name, qnty) values(1, '강남', '501', 30);
