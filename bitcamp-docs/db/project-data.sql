@@ -10,6 +10,9 @@ insert into lms_lesson(lesson_id, titl, conts, sdt, edt, tot_hr, day_hr)
 insert into lms_lesson(lesson_id, titl, conts, sdt, edt, tot_hr, day_hr)
   values(105, 'IoT 프로그래밍', '프로그래밍 배우기', '2019-5-1', '2019-6-28', 400, 8);
 
+  
+ 
+ 
 -- 회원 예제 데이터
 insert into lms_member(member_id, name, email, pwd) 
   values(11, 'user1', 'user1@test.com', password('1111'));
