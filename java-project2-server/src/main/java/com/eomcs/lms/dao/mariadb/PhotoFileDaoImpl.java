@@ -8,19 +8,20 @@ import java.util.List;
 import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
+import com.eomcs.util.DataSource;
 
 public class PhotoFileDaoImpl implements PhotoFileDao {
-
-  // 외부에서 커넥션 객체를 주입 받는다.
-  Connection con;
-
-  public PhotoFileDaoImpl(Connection con) {
-    this.con = con;
+  DataSource dataSource;
+  
+  public PhotoFileDaoImpl(DataSource dataSource) {
+    this.dataSource=dataSource;
   }
-
+  
   @Override
   public List<PhotoFile> findByPhotoBoardNo(int photoBoardNo) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    Connection con =dataSource.getConnection();;
+    try (
+        PreparedStatement stmt = con.prepareStatement(
         "select photo_file_id, photo_id, file_path"
         + " from lms_photo_file"
         + " where photo_id = ? "
@@ -48,7 +49,9 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
 
   @Override
   public void insert(PhotoFile photoFile) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    Connection con =dataSource.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
         "insert into lms_photo_file(file_path,photo_id) values(?,?)")) {
 
       stmt.setString(1, photoFile.getFilePath());
@@ -62,6 +65,7 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
   
   @Override
   public PhotoBoard findByNo(int no) {
+    Connection con =dataSource.getConnection();
     try {
       // 조회수 증가시키기
       try (PreparedStatement stmt = con.prepareStatement(
@@ -99,7 +103,9 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
   
   @Override
   public int update(PhotoBoard photoBoard) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    Connection con =dataSource.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
         "update lms_photo set titl = ? where photo_id = ?")) {
 
       stmt.setString(1, photoBoard.getTitle());
@@ -113,7 +119,9 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
   
   @Override
   public int deleteByPhotoBoardNo(int photoBoardNo) {
-    try (PreparedStatement stmt = con.prepareStatement(
+    Connection con =dataSource.getConnection();
+    try (
+        PreparedStatement stmt = con.prepareStatement(
         "delete from lms_photo_file where photo_id = ?")) {
 
       stmt.setInt(1, photoBoardNo);

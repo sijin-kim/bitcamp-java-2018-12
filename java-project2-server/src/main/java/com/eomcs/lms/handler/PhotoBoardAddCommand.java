@@ -22,8 +22,6 @@ public class PhotoBoardAddCommand extends AbstractCommand {
   @Override
   public void execute(Response response) throws Exception {
     
-    
-    
     PhotoBoard board = new PhotoBoard();
     board.setTitle(response.requestString("사진 제목?"));
     board.setLessonNo(response.requestInt("수업?"));
@@ -47,13 +45,15 @@ public class PhotoBoardAddCommand extends AbstractCommand {
       PhotoFile file = new PhotoFile();
       file.setFilePath(filePath);
       file.setPhotoBoardNo(board.getNo());
+      
+      
       photoFileDao.insert(file);
       count++;
     }
         
     response.println("저장하였습니다.");
     //트랜잭션종료 -
-   ApplicationInitializer.con.commit();
+ //  ApplicationInitializer.con.commit();
     
   }
 }

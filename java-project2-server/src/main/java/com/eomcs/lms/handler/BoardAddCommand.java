@@ -1,4 +1,5 @@
 package com.eomcs.lms.handler;
+import com.eomcs.lms.ApplicationInitializer;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
@@ -17,6 +18,7 @@ public class BoardAddCommand extends AbstractCommand {
     boardDao.insert(board);
     
     response.println("저장하였습니다.");
+   
   }
 }
 

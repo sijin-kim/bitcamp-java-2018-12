@@ -31,6 +31,7 @@ import com.eomcs.lms.handler.PhotoBoardDeleteCommand;
 import com.eomcs.lms.handler.PhotoBoardDetailCommand;
 import com.eomcs.lms.handler.PhotoBoardListCommand;
 import com.eomcs.lms.handler.PhotoBoardUpdateCommand;
+import com.eomcs.util.DataSource;
 
 // App 객체의 상태가 변경될 때 마다 보고 받는 옵저버가 되려면 
 // ApplicationContextListener 규격에 따라 작성해야 한다.
@@ -38,28 +39,30 @@ public class ApplicationInitializer implements ApplicationContextListener {
 
   
   //command 객체서 commit 을 호출할수있도록 커넥션 객체를 공개한다.
-  public static Connection con;
+  
+  
   
   @Override
   public void contextInitialized(Map<String, Object> context) {
     try {
-      // DAO가 사용할 커넥션 객체를 여기서 준비한다.
-      con = DriverManager.getConnection(
-          "jdbc:mariadb://localhost/bitcampdb?user=bitcamp&password=1111");
       
       
-      //수동 커밋을 하도록 설정하기
-      //= > 작업을 완료한 다음에는 명시적으로 커넥션 객체에대해 commit 을 호출해야한다.
+      //데이터 소스 객체준비
       
+      DataSource dataSource = new DataSource(
+          "org.mariadb.jdbc.Driver",
+          "jdbc:mariadb://localhost/bitcampdb",
+          "bitcamp",
+          "1111");
       
-      con.setAutoCommit(false);
+      context.put("dataSource",dataSource );
       
       // DAO 객체 준비
-      LessonDaoImpl lessonDao = new LessonDaoImpl(con);
-      MemberDaoImpl memberDao = new MemberDaoImpl(con);
-      BoardDaoImpl boardDao = new BoardDaoImpl(con);
-      PhotoBoardDaoImpl photoBoardDao = new PhotoBoardDaoImpl(con);
-      PhotoFileDaoImpl photoFileDao = new PhotoFileDaoImpl(con);
+      LessonDaoImpl lessonDao = new LessonDaoImpl(dataSource);
+      MemberDaoImpl memberDao = new MemberDaoImpl(dataSource);
+      BoardDaoImpl boardDao = new BoardDaoImpl(dataSource);
+      PhotoBoardDaoImpl photoBoardDao = new PhotoBoardDaoImpl(dataSource);
+      PhotoFileDaoImpl photoFileDao = new PhotoFileDaoImpl(dataSource);
       
       context.put("/lesson/add", new LessonAddCommand(lessonDao));
       context.put("/lesson/list", new LessonListCommand(lessonDao));
@@ -95,12 +98,6 @@ public class ApplicationInitializer implements ApplicationContextListener {
 
   @Override
   public void contextDestroyed(Map<String, Object> context) {
-    try {
-      // 애플리케이션이 종료될 때 DBMS와의 연결을 끊는다.
-      con.close();
-    } catch (Exception e) {
-      throw new ApplicationContextException(e);
-    }   
   }
 }
 
