@@ -12,17 +12,18 @@ import com.eomcs.util.DataSource;
 
 public class PhotoBoardDaoImpl implements PhotoBoardDao {
 
+  // DataSource 의존 객체 선언
   DataSource dataSource;
   
   public PhotoBoardDaoImpl(DataSource dataSource) {
-    this.dataSource=dataSource;
+    this.dataSource = dataSource;
   }
-
+  
   @Override
   public List<PhotoBoard> findAll() {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select photo_id, titl, cdt, vw_cnt, lesson_id from lms_photo"
             + " order by photo_id desc")) {
 
@@ -48,19 +49,19 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
 
   @Override
   public void insert(PhotoBoard photoBoard) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_photo(titl,lesson_id) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
-      stmt.setString(1,photoBoard.getTitle());
-      stmt.setInt(2,photoBoard.getLessonNo());
+      stmt.setString(1, photoBoard.getTitle());
+      stmt.setInt(2, photoBoard.getLessonNo());
       stmt.executeUpdate();
       
-      try(ResultSet rs = stmt.getGeneratedKeys()){
+      try (ResultSet rs = stmt.getGeneratedKeys()) {
         rs.next();
-        photoBoard.setNo(rs.getInt(1)); // 자동 생성된 pk값을 파라미터로 받은 객체에 보관한ㄷ.
+        photoBoard.setNo(rs.getInt(1)); // 자동 생성된 PK 값을 파라미터로 받은 객체에 보관한다.
       }
       
     } catch (Exception e) {
@@ -70,7 +71,8 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
 
   @Override
   public PhotoBoard findByNo(int no) {
-    Connection con =dataSource.getConnection();
+    Connection con = dataSource.getConnection();
+    
     try {
       // 조회수 증가시키기
       try (PreparedStatement stmt = con.prepareStatement(
@@ -108,9 +110,9 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   
   @Override
   public int update(PhotoBoard photoBoard) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_photo set titl = ? where photo_id = ?")) {
 
       stmt.setString(1, photoBoard.getTitle());
@@ -124,9 +126,9 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   
   @Override
   public int delete(int no) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_photo where photo_id = ?")) {
 
       stmt.setInt(1, no);

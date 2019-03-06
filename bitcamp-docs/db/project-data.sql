@@ -28,6 +28,14 @@ insert into lms_board(board_id, conts) values(3, '내용3');
 insert into lms_board(board_id, conts) values(4, '내용4');
 insert into lms_board(board_id, conts) values(5, '내용5');
 
+
+insert into x_board(title, contents) values('가', '힘든월요일');
+insert into x_board(title, contents) values('나', '그냥화요일');
+insert into x_board(title, contents) values('다', '중간수요일');
+insert into x_board(title, contents) values('라', '다가온다목요일');
+insert into x_board(title, contents) values('마', '기쁜금요일');
+
+
 -- 수업 사진 게시물 예제 데이터
 insert into lms_photo(photo_id, lesson_id, titl) 
   values(1, 101, '자바 컴파일러 구동 원리');

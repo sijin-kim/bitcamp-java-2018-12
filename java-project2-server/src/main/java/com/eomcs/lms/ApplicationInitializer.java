@@ -1,7 +1,5 @@
 package com.eomcs.lms;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Map;
 import com.eomcs.lms.context.ApplicationContextException;
 import com.eomcs.lms.context.ApplicationContextListener;
@@ -37,25 +35,18 @@ import com.eomcs.util.DataSource;
 // ApplicationContextListener 규격에 따라 작성해야 한다.
 public class ApplicationInitializer implements ApplicationContextListener {
 
-  
-  //command 객체서 commit 을 호출할수있도록 커넥션 객체를 공개한다.
-  
-  
-  
   @Override
   public void contextInitialized(Map<String, Object> context) {
     try {
-      
-      
-      //데이터 소스 객체준비
-      
+      // 커넥션풀(DataSource) 객체 준비 
       DataSource dataSource = new DataSource(
           "org.mariadb.jdbc.Driver",
           "jdbc:mariadb://localhost/bitcampdb",
           "bitcamp",
           "1111");
       
-      context.put("dataSource",dataSource );
+      // 다른 객체에서도 DataSource를 사용할 수 있도록 보관소 저장한다.
+      context.put("dataSource", dataSource);
       
       // DAO 객체 준비
       LessonDaoImpl lessonDao = new LessonDaoImpl(dataSource);
@@ -88,8 +79,10 @@ public class ApplicationInitializer implements ApplicationContextListener {
       context.put("/photoboard/list", new PhotoBoardListCommand(photoBoardDao));
       context.put("/photoboard/detail", 
           new PhotoBoardDetailCommand(photoBoardDao, photoFileDao));
-      context.put("/photoboard/update", new PhotoBoardUpdateCommand(photoBoardDao,photoFileDao));
-      context.put("/photoboard/delete", new PhotoBoardDeleteCommand(photoBoardDao,photoFileDao));
+      context.put("/photoboard/update", 
+          new PhotoBoardUpdateCommand(photoBoardDao, photoFileDao));
+      context.put("/photoboard/delete", 
+          new PhotoBoardDeleteCommand(photoBoardDao, photoFileDao));
       
     } catch (Exception e) {
       throw new ApplicationContextException(e);

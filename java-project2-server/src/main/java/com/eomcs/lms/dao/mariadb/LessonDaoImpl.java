@@ -1,4 +1,3 @@
-// DBMS 적용
 package com.eomcs.lms.dao.mariadb;
 
 import java.sql.Connection;
@@ -12,16 +11,17 @@ import com.eomcs.util.DataSource;
 
 public class LessonDaoImpl implements LessonDao {
 
+  // DataSource 의존 객체 선언
   DataSource dataSource;
   
   public LessonDaoImpl(DataSource dataSource) {
-    this.dataSource=dataSource;
+    this.dataSource = dataSource;
   }
   
   public List<Lesson> findAll() {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select lesson_id, titl, sdt, edt, tot_hr from lms_lesson"
         + " order by lesson_id desc")) {
       
@@ -46,9 +46,9 @@ public class LessonDaoImpl implements LessonDao {
   }
 
   public void insert(Lesson lesson) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "insert into lms_lesson(titl,conts,sdt,edt,tot_hr,day_hr)"
         + " values(?,?,?,?,?,?)")) {
       
@@ -67,9 +67,9 @@ public class LessonDaoImpl implements LessonDao {
   }
 
   public Lesson findByNo(int no) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "select lesson_id, titl, conts, sdt, edt, tot_hr, day_hr"
         + " from lms_lesson"
         + " where lesson_id = ?")) {
@@ -99,9 +99,9 @@ public class LessonDaoImpl implements LessonDao {
   }
 
   public int update(Lesson lesson) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "update lms_lesson set"
         + " titl = ?,"
         + " conts = ?,"
@@ -126,9 +126,9 @@ public class LessonDaoImpl implements LessonDao {
   }
 
   public int delete(int no) {
-    Connection con =dataSource.getConnection();
-    try (
-        PreparedStatement stmt = con.prepareStatement(
+    Connection con = dataSource.getConnection();
+    
+    try (PreparedStatement stmt = con.prepareStatement(
         "delete from lms_lesson where lesson_id = ?")) {
       
       stmt.setInt(1, no);
