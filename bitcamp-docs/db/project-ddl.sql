@@ -10,7 +10,7 @@ drop table if exists lms_board;
 -- 사진 게시판 테이블 삭제
 drop table if exists lms_photo;
 
---사진 게시물 첨부 파일 테이블 삭제
+-- 사진 게시물 첨부 파일 테이블 삭제
 drop table if exists lms_photo_file;
 
 -- 수업 테이블 생성

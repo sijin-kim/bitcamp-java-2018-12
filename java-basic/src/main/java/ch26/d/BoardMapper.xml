@@ -13,30 +13,19 @@
  type 속성 =>  자바 클래스 전체 이름 또는 별명
  id 속성 => SQL 문을 설정할 때 사용할 식별자
 -->
-
-
   <resultMap type="board2" id="board2Map">
     <!-- PK 컬럼을 지정할 때는 id 엘리먼트를 사용하고, 
-         일반 컬럼을 지정할 때는 result 엘리먼트를 사용하라! 
-    <id column="board_id"         property="no"/> -->
+         일반 컬럼을 지정할 때는 result 엘리먼트를 사용하라! -->
+    <id column="board_id"         property="no"/>
     
     <!-- 컬럼명과 프로퍼티명이 같을 경우 연결 정보를 생략해도 된다. 
     <result column="title"        property="title"/>
     <result column="contents"     property="contents"/>
-   -->
+    -->
     
     <result column="created_date" property="createdDate"/>
     <result column="view_count"   property="viewCount"/>
   </resultMap>
-
-
-
-
-
-
-
-
-
 
 
 <!-- 
@@ -50,11 +39,11 @@ SQL 매퍼 파일에서는 그 별명을 사용할 수 있다.
   </select>
   
   <select id="select2" resultType="board">
-    select * from x_board where board_id = 33
+    select * from x_board where board_id = 5
   </select>
   
   <select id="select3" resultType="board2">
-    select * from x_board where board_id = 35
+    select * from x_board where board_id = 5
   </select>
   
   <select id="select4" resultType="board2">
@@ -77,14 +66,14 @@ SQL 매퍼 파일에서는 그 별명을 사용할 수 있다.
      select 문을 작성할 때 컬럼 이름에 대해 일일이 별명을 부여할 필요가 없어 
      유지보수에 좋다.-->
   <select id="select5" resultMap="board2Map">
-    select * from x_board where board_id = 34
+    select * from x_board where board_id = 5
   </select>
   
 <!-- select의 row 값을 담을 클래스를 지정할 때 Map 구현체를 지정해도 된다.
      그러면 Map 구현체를 생성하여 그 맵 객체에 컬럼 값을 담을 것이다. 
      컬럼의 이름이 맵 객체의 key로 사용된다.-->
   <select id="select6" resultType="map">
-    select * from x_board where board_id = 32
+    select * from x_board where board_id = 5
   </select>
   
 <!-- select의 row가 여러 개일 경우, 

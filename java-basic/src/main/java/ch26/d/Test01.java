@@ -3,7 +3,6 @@ package ch26.d;
 
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -46,27 +45,11 @@ public class Test01 {
     // selectList()를 실행해야 한다.
     //Board board = sqlSession.selectOne("board.select1");
     
-      Board board=sqlSession.selectOne("board.select2");
-      System.out.println(board);
-      
-      System.out.println("--------------------------------");
-      
-      Board2 board2 =sqlSession.selectOne("board.select3");
-      System.out.println(board2);
-      
-      System.out.println("---------------------------");
-      
-      Board2 board3 =sqlSession.selectOne("board.select5");
-      System.out.println(board3);
-      System.out.println("----------------------------");
-      
-      List<Map> list1 = sqlSession.selectList("board.select6");
-      for(Map lists : list1) {
-        System.out.println(lists);
-      }
-     
+    Board board = sqlSession.selectOne("board.select2"); // OK!
+    
+    System.out.println(board);
   }
-      
+
 }
 
 

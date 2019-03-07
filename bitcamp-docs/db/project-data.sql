@@ -10,9 +10,6 @@ insert into lms_lesson(lesson_id, titl, conts, sdt, edt, tot_hr, day_hr)
 insert into lms_lesson(lesson_id, titl, conts, sdt, edt, tot_hr, day_hr)
   values(105, 'IoT 프로그래밍', '프로그래밍 배우기', '2019-5-1', '2019-6-28', 400, 8);
 
-  
- 
- 
 -- 회원 예제 데이터
 insert into lms_member(member_id, name, email, pwd) 
   values(11, 'user1', 'user1@test.com', password('1111'));
@@ -27,14 +24,6 @@ insert into lms_board(board_id, conts) values(2, '내용2');
 insert into lms_board(board_id, conts) values(3, '내용3');
 insert into lms_board(board_id, conts) values(4, '내용4');
 insert into lms_board(board_id, conts) values(5, '내용5');
-
-
-insert into x_board(title, contents) values('가', '힘든월요일');
-insert into x_board(title, contents) values('나', '그냥화요일');
-insert into x_board(title, contents) values('다', '중간수요일');
-insert into x_board(title, contents) values('라', '다가온다목요일');
-insert into x_board(title, contents) values('마', '기쁜금요일');
-
 
 -- 수업 사진 게시물 예제 데이터
 insert into lms_photo(photo_id, lesson_id, titl) 
