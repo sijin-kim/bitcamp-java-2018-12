@@ -46,8 +46,6 @@ public class Test03 {
     
     keyboard.close();
     
-    
-    
     List<Board> boards = sqlSession.selectList("board.select3", params);
     
     for (Board b : boards) {

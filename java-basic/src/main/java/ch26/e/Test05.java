@@ -29,9 +29,9 @@ public class Test05 {
     
     // insert 한 후 자동 생성된 PK 값을 알고 싶으면 
     // SQL 매퍼 파일에 SQL문을 정의할 때 PK 값을 리턴해 달라고 설정해야 한다.
-    sqlSession.insert("board.insert3", board);
+   sqlSession.insert("board.insert3", board);
     System.out.println(board);
-    System.out.println("-------------------------------");
+   System.out.println("-------------------------------");
     
     
     List<Board> boards = sqlSession.selectList("board.select1");

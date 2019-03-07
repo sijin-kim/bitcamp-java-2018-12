@@ -12,7 +12,7 @@ public class Board {
   
   @Override
   public String toString() {
-    return "Board2 [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
+    return "Board [no=" + no + ", title=" + title + ", contents=" + contents + ", createdDate="
         + createdDate + ", viewCount=" + viewCount + "]";
   }
   
