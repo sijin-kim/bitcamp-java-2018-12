@@ -13,19 +13,17 @@
  type 속성 =>  자바 클래스 전체 이름 또는 별명
  id 속성 => SQL 문을 설정할 때 사용할 식별자
 -->
-  <resultMap type="board2" id="board2Map">
-    <!-- PK 컬럼을 지정할 때는 id 엘리먼트를 사용하고, 
-         일반 컬럼을 지정할 때는 result 엘리먼트를 사용하라! -->
-    <id column="board_id"         property="no"/>
-    
-    <!-- 컬럼명과 프로퍼티명이 같을 경우 연결 정보를 생략해도 된다. 
-    <result column="title"        property="title"/>
-    <result column="contents"     property="contents"/>
-    -->
-    
-    <result column="created_date" property="createdDate"/>
-    <result column="view_count"   property="viewCount"/>
-  </resultMap>
+
+<resultMap type="board2" id="board2Map">
+
+<id column="board_id"   property="no"/>
+<result column="title"  property="title"/>
+<result column="contents" property="contents"/>
+<result column="created_date" property="createdDate"/>
+<result column="view_count" property="viewCount"/>
+
+</resultMap>
+
 
 
 <!-- 
@@ -38,13 +36,17 @@ SQL 매퍼 파일에서는 그 별명을 사용할 수 있다.
     select * from x_board
   </select>
   
-  <select id="select2" resultType="board">
-    select * from x_board where board_id = 5
-  </select>
-  
+ <select id="select2" resultType="board">
+ select * from  
+ x_board
+ where
+ board_id =5
+ </select>
+ 
   <select id="select3" resultType="board2">
     select * from x_board where board_id = 5
   </select>
+  
   
   <select id="select4" resultType="board2">
     select

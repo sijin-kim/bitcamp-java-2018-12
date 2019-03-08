@@ -30,8 +30,14 @@
     프로퍼티명은 아무거나 상관없다.
   -->
   <select id="select2" resultMap="boardMap" parameterType="int">
-    select * from x_board where board_id = #{amuguna}
+  select *
+  from
+  x_board
+  where 
+  board_id = #{value}
   </select>
+
+
 
   <select id="select3" resultMap="boardMap" parameterType="string">
     select * from x_board where title like concat('%', #{value}, '%')

@@ -21,7 +21,7 @@ public class Test03 {
  
     Board board = new Board();
     board.setNo(5);
-    board.setTitle("xxsadsd");
+    board.setTitle("xxxxx");
     board.setContents("내용이라네요...");
     
     int count = sqlSession.update("board.update", board);

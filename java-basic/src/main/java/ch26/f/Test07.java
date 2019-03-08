@@ -25,20 +25,22 @@ public class Test07 {
 
     
     Scanner keyboard = new Scanner(System.in);
-    System.out.print("정렬할 목록? ");
-    String list= keyboard.nextLine();
-    if(list.length()>0) {
-      params.put("list", list);
+    System.out.print("정렬할 컬럼? ");
+    String column = keyboard.nextLine();
+    if (column.length() > 0) {
+      params.put("column", column);
     }
-    System.out.print("정렬 방식");
-    String sort =keyboard.nextLine();
-    if(sort.length()>0) {
+    
+    System.out.print("정렬방식? ");
+    String sort = keyboard.nextLine();
+    if (sort.length() > 0) {
       params.put("sort", sort);
     }
+    
     keyboard.close();
     
     // 정렬할 컬럼 이름과 정렬 방식(asc 또는 desc)을 값을 전달할 수 없다.
-  //  List<Board> boards = sqlSession.selectList("board.select7_error", params);
+    //List<Board> boards = sqlSession.selectList("board.select7_error", params);
     
     // 컬럼 이름과 정렬 방식과 같은 SQL 키워드를 값으로 전달하려면 
     // SQL 매퍼 파일에서 #{프로퍼티명} 대신에 ${프로퍼티명} 문법을 사용해야 한다.

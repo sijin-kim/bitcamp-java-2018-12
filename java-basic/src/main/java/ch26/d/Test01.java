@@ -45,9 +45,9 @@ public class Test01 {
     // selectList()를 실행해야 한다.
     //Board board = sqlSession.selectOne("board.select1");
     
-    Board board = sqlSession.selectOne("board.select2"); // OK!
-    
-    System.out.println(board);
+      Board board = sqlSession.selectOne("board.select2");
+      System.out.println(board);
+        
   }
 
 }

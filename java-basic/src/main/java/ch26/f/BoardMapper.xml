@@ -75,13 +75,13 @@
     from x_board
     <where>
 	    <if test="no != null">
-	       board_id = #{no}
+	      or board_id = #{no}
 	    </if>
 	    <if test="title != null">
-	       title like concat('%', #{title}, '%')
+	      or title like concat('%', #{title}, '%')
 	    </if>
 	    <if test="contents != null">
-	       contents like concat('%', #{contents}, '%')
+	      or contents like concat('%', #{contents}, '%')
 	    </if>
     </where>
   </select>
@@ -93,22 +93,20 @@
     select * 
     from x_board
     where
-    <choose>
-    <when test="no != null">
-     board_id = #{no}
-    </when>
-    <when test="title != null">
-    title = #{title}
-    </when>
-    <when test="contents != null">
-    contents = #{contents}
-    </when>
-    <otherwise>
-       1=1
-    </otherwise>
-    
-    </choose>
-    
+      <choose> 
+	      <when test="no != null">
+	        board_id = #{no}
+	      </when>
+	      <when test="title != null">
+	        title like concat('%', #{title}, '%')
+	      </when>
+	      <when test="contents != null">
+	        contents like concat('%', #{contents}, '%')
+	      </when>
+	      <otherwise>
+	        1=1
+	      </otherwise>
+      </choose>
   </select>
 
 <!-- <where> 태그 대신에 <trim> 태그를 사용하여 문장에 앞에 오는 OR 나 AND 를 제거할 수 있다. -->
@@ -162,13 +160,12 @@
      => 사용자가 입력한 값을 자바 코드에서 판단하여 자바 코드로 입력한 값을 전달하라!
      -->
   <select id="select7_ok" resultMap="boardMap" parameterType="map">
-  select *
-  from
-  x_board
-  order by
-  <if test="list != null">
-   ${list} ${sort}  
-  </if>
+    select * 
+    from x_board
+    order by 
+      <if test="column != null">
+        ${column} ${sort}
+      </if>
   </select>
 
 <!-- udpate를 실행할 때 
