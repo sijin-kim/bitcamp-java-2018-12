@@ -34,7 +34,7 @@ public class DaoFactory {
      // => 파라미터로 받은 프록시 객체로부터 인터페이스 이름을 알아낸다.
      String sqlId = String.format("%s.%s", 
          proxy.getClass().getInterfaces()[0].getName(),
-         method.getName());    //com.eomcs.lms.dao.BoardDao
+         method.getName());
      
      // 2) 메서드의 리턴 타입을 알아낸다.
      Class<?> returnType = method.getReturnType();
