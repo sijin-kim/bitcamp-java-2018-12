@@ -6,4 +6,3 @@ public class A {
   protected void a_protected() {}
   public void a_public() {}
 }
-

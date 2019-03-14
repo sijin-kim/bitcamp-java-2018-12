@@ -56,13 +56,11 @@ public class Test01 {
       }
     }
 
-    
     // Calculator 인터페이스를 구현한 클래스를 만들고 그 인스턴스를 생성하여 리턴한다.
     Calculator c1 = (Calculator) Proxy.newProxyInstance(
-        Calculator.class.getClassLoader(),   //  구현체를 만들기 위해 사용하는 인터페이스의 클래스로더,
+        Calculator.class.getClassLoader(), 
         new Class[] {Calculator.class}, 
         new MyHandler());
-    
 
     System.out.println(c1.plus(10, 20));
     System.out.println(c1.minus(10, 20));

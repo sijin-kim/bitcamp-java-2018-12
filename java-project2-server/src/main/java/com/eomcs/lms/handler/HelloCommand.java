@@ -1,19 +1,14 @@
 package com.eomcs.lms.handler;
-import java.util.List;
-import com.eomcs.lms.dao.BoardDao;
-import com.eomcs.lms.domain.Board;
 
-public class HelloCommand extends AbstractCommand {
+import com.eomcs.lms.context.Component;
+import com.eomcs.lms.context.RequestMapping;
 
-  
-  public HelloCommand() {
-   
-    this.name="/hello";
-  }
+@Component
+public class HelloCommand {
 
-  @Override
+  @RequestMapping("/hello")
   public void execute(Response response) {
-    response.println("안녕하세요");
+    response.println("안녕하세요!");
   }
 
 }

@@ -21,7 +21,6 @@ public class Test03 {
             int a = (int) params[0]; // auto-unboxing => ((Integer)args[0]).intValue();
             int b = (int) params[1]; // auto-unboxing => ((Integer)args[1]).intValue();
 
-            
             switch (method.getName()) {
               case "plus":
                 return a + b;

@@ -6,4 +6,3 @@ public class B extends A {
   protected void b_protected() {}
   public void b_public() {}
 }
-

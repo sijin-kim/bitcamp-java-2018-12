@@ -8,19 +8,12 @@ public class Test02 {
 
   public static void main(String[] args) throws Exception {
     
-       Class<?> clazz = Calculator.class;
-       
-       Method[] methods= clazz.getMethods();
-       
-         for(Method m: methods) {
-           System.out.println(m.getName());
-           
-         }
-       
-       
-      
+    Class<?> clazz = Calculator.class;
+    
+    Method[] methods = clazz.getMethods();
+    for (Method m : methods) {
+      System.out.println(m.getName());
     }
   }
 
-
-
+}

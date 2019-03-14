@@ -11,7 +11,6 @@ public class Test02 {
     
     // Calculator, Calculator2, Calculator3 인터페이스를 구현한 
     // 클래스를 만들고 그 인스턴스를 생성하여 리턴한다.
-    
     Object proxy = Proxy.newProxyInstance(
         Test02.class.getClassLoader(), 
         new Class[] {
@@ -19,8 +18,6 @@ public class Test02 {
             Calculator2.class, 
             Calculator3.class}, 
         new InvocationHandler() {
-          
-          
           @Override
           public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
          // newProxyInstance()가 생성한 객체에 대해 메서드를 호출할 때마다 이 메서드가 호출된다.

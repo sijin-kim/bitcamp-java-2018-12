@@ -13,28 +13,6 @@ import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.dao.PhotoFileDao;
-import com.eomcs.lms.handler.BoardAddCommand;
-import com.eomcs.lms.handler.BoardDeleteCommand;
-import com.eomcs.lms.handler.BoardDetailCommand;
-import com.eomcs.lms.handler.BoardListCommand;
-import com.eomcs.lms.handler.BoardUpdateCommand;
-import com.eomcs.lms.handler.LessonAddCommand;
-import com.eomcs.lms.handler.LessonDeleteCommand;
-import com.eomcs.lms.handler.LessonDetailCommand;
-import com.eomcs.lms.handler.LessonListCommand;
-import com.eomcs.lms.handler.LessonUpdateCommand;
-import com.eomcs.lms.handler.MemberAddCommand;
-import com.eomcs.lms.handler.MemberDeleteCommand;
-import com.eomcs.lms.handler.MemberDetailCommand;
-import com.eomcs.lms.handler.MemberListCommand;
-import com.eomcs.lms.handler.MemberSearchCommand;
-import com.eomcs.lms.handler.MemberUpdateCommand;
-import com.eomcs.lms.handler.PhotoBoardAddCommand;
-import com.eomcs.lms.handler.PhotoBoardDeleteCommand;
-import com.eomcs.lms.handler.PhotoBoardDetailCommand;
-import com.eomcs.lms.handler.PhotoBoardListCommand;
-import com.eomcs.lms.handler.PhotoBoardSearchCommand;
-import com.eomcs.lms.handler.PhotoBoardUpdateCommand;
 import com.eomcs.mybatis.DaoFactory;
 import com.eomcs.mybatis.SqlSessionFactoryProxy;
 import com.eomcs.mybatis.TransactionManager;
@@ -81,9 +59,8 @@ public class ApplicationInitializer implements ApplicationContextListener {
       //    ApplicationContext에서 준비할 인스턴스 패키지 이름을 넘긴다.
       ApplicationContext appCtx = new ApplicationContext("com.eomcs.lms", beans);
       
-      
-      context.put("applicationContext",appCtx);
-      
+      // ServerApp 쪽에서 사용할 수 있도록 ApplicationContext를 맵에 저장한다.
+      context.put("applicationContext", appCtx);
       
     } catch (Exception e) {
       throw new ApplicationContextException(e);
