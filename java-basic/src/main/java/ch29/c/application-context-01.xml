@@ -10,8 +10,6 @@
   -->
   <bean id="c1" class="ch29.b.Car"></bean>
   
-
-  
   <!-- ch29.c.Car는 기본 생성자가 없기 때문에 예외 발생! -->
   <bean id="c2" class="ch29.c.Car"/>
 </beans>

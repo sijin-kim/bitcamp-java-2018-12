@@ -1,13 +1,13 @@
-// 생성자 호출 - c 네임스페이스를 사용하여 생성자 지정하기
-package ch29.c;
+// BeanPostProcessor - @Autowired 애노테이션을 처리할 BeanPostProcessor 만들기
+package ch29.h;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Test04 {
+public class Test02 {
   public static void main(String[] args) {
     ApplicationContext iocContainer = 
-        new ClassPathXmlApplicationContext("ch29/c/application-context-04.xml");
+        new ClassPathXmlApplicationContext("ch29/h/application-context-02.xml");
     
     System.out.println("---------------------------------------");
     

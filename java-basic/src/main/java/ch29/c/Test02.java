@@ -13,7 +13,6 @@ public class Test02 {
     
     System.out.println("---------------------------------------");
     
-
     System.out.println(iocContainer.getBean("c4"));
     System.out.println(iocContainer.getBean("c5"));
   }

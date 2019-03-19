@@ -32,7 +32,6 @@
   <bean id="c3" class="ch29.d.Car">
     <property name="maker" value="비트자동차"/>
     <property name="model" value="모델2"/>
-    
     <property name="blackBox">
       <bean class="ch29.d.BlackBox">
         <property name="maker" value="비트오토"/>
@@ -40,44 +39,6 @@
       </bean>
     </property>
   </bean>
-  
-  
-  <bean id="c8" class="ch29.d.Car">
-  <property name="maker" value="바텀"/>
-  <property name="model" value="스포트카"/>
-  <property name="blackBox">
-    <bean class="ch29.d.BlackBox">
-    <property name="maker" value="비트"/>
-    <property name="model" value="비트okok"/>
-    
-    </bean>
- 
-  </property>
- 
-  
-  
-  </bean>
-  
-  
-  
-  
-  
-  <bean id="c7" class="ch29.d.Car">
-  <property name="maker" value="시진자동차"/>
-  <property name="model" value="다이아몬드모델"/>
-  <property name="cc" value="3500"/>
-  <property name="valve" value="102"/>
-  <property name="auto" value="true"/>
-  
-  <property name="blackBox">
-  
-  <bean class="ch29.d.BlackBox">
-  <property name="maker" value="시진오트"/>
-  <property name="model" value="시진오트ok"/>
-  </bean>
-  
-  </property>
-   </bean>
 </beans>
 
 

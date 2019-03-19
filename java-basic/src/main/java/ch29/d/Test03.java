@@ -29,8 +29,6 @@ public class Test03 {
     // 만약 c1과 c3가 같은 BlackBox를 공유하고 싶다면,
     // BlackBox 객체를 별도로 생성해야 한다. 즉 프로퍼티에서 생성하면 안된다.
     System.out.println(c1.getBlackBox() == c3.getBlackBox());
-    
-    
   }
 }
 
