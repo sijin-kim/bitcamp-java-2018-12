@@ -1,6 +1,7 @@
-// BeanPostProcessor - context :annotation -config 태그의 의미와 사용법
+// BeanPostProcessor - <context:annotation-config/> 태그의 의미와 사용법
 package ch29.h;
 
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -16,13 +17,11 @@ public class Test04 {
     System.out.println(iocContainer.getBean("c3"));
     System.out.println(iocContainer.getBean("c4"));
     
-    
     System.out.println("---------------------------------------");
     
-    String[] names =iocContainer.getBeanDefinitionNames();
-    for(String name : names) {
-      System.out.println(name+"=======>"+iocContainer.getBean(name).getClass().getName());
-      
+    String[] names = iocContainer.getBeanDefinitionNames();
+    for (String name : names) {
+      System.out.println(name + " ====> " + iocContainer.getBean(name).getClass().getName());
     }
     
   }

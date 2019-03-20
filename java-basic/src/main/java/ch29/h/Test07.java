@@ -1,4 +1,4 @@
-// BeanPostProcessor - @Autowired 사용법: 필드에 븉여도된다 .
+// BeanPostProcessor - @Autowired 사용법 : 같은 타입의 객체가 여러 있을 경우
 package ch29.h;
 
 import org.springframework.context.ApplicationContext;
@@ -9,13 +9,11 @@ public class Test07 {
     ApplicationContext iocContainer = 
         new ClassPathXmlApplicationContext("ch29/h/application-context-07.xml");
     
-    
-    //@qualifier("객체이름") 를 사용하여 여러개의 객체 중에서 어떤 것을 주입할 지 지정한다.
+    //@Qualifier("객체이름")를 사용하여 여러 개의 객체 중에서 어떤 것을 주입할 지 지정한다.
+    //
     System.out.println("---------------------------------------");
     
     System.out.println(iocContainer.getBean("c1"));
-    
-    
   }
 }
 

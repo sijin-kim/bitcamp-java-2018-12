@@ -2,8 +2,6 @@ package ch29.h;
 
 import java.util.Date;
 import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class Car6 {
   private String maker;
@@ -13,20 +11,26 @@ public class Car6 {
   private boolean auto;
   private Date createdDate;
   
+  // @Autowired + @Qualifier = @Resource
+  //@Autowired(required=false)
+  //@Qualifier("bb2")
   
-  
- // @Autowired(required=false)
- // @Qualifier("bb2") 
-  @Resource(name="bb2") 
+  //OpenJDK에서는 @Resource 라이브러리가 포함되어 있지 않다. 
+  //별도로 라이브러리를 추가해야 한다.
+  //=> mvnrepository.com 에서 javax.annotation 검색하라.
+  //=> build.gradle에 추가하라.
+  //=> '$ eclipse gradle' 실행하라.
+  //=> 이클립스에서 프로젝트를 갱신하라.
+  @Resource(name="bb2")   
   private BlackBox blackBox;
   
   public Car6() {
-    System.out.println("Car5()");
+    System.out.println("Car6()");
   }
   
   @Override
   public String toString() {
-    return "Car5 [maker=" + maker + ", model=" + model + ", cc=" + cc + ", valve=" + valve
+    return "Car6 [maker=" + maker + ", model=" + model + ", cc=" + cc + ", valve=" + valve
         + ", auto=" + auto + ", createdDate=" + createdDate + ", blackBox=" + blackBox + "]";
   }
 
@@ -66,7 +70,6 @@ public class Car6 {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
- 
 }
 
 

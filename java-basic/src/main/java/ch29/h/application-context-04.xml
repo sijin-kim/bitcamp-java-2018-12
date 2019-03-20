@@ -8,20 +8,19 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
   
-  
-  
-  
-  <!-- @Autowired 애노테이션을 뿐만 아니라 다른 여러 애노테이션을 처리할 
-   beanpostprocessor 클래스들을 한번에 등록하기
-   => 스프링 ioc 컨테이너는 각 에노테이션을 처리할 beanpostprocessor룰 제공한다.
-   => 문제는 각 애노테이션을 처리할 클래스를 암기해야 한다는 것이다.
-   => 그래서 스프링 ioc 컨테이너는 이런 번거로움을 없에기 위해 특별한 태그를 제공한다.
-   => 이 태그를 선언하면 스프링 ioc 컨테이너가 자동으로 해당 beanpostprocessor 들을
-   생성한다.
+  <!-- @Autowired 애노테이션 뿐만 아니라 다른 여러 애노테이션을 처리할 
+       BeanPostProcessor 클래스들을 한 번에 등록하기!
+       => 스프링 IoC 컨테이너는 각 애노테이션을 처리할 BeanPostProcessor를 제공한다.
+       => 문제는 각 애노테이션을 처리할 클래스를 암기해야 한다는 것이다.
+       => 그래서 스프링 IoC 컨테이너는 이런 번거로움을 없애기 위해 
+          특별한 태그를 제공한다.
+       => 이 태그를 선언하면 스프링 IoC 컨테이너가 자동으로 해당 BeanPostProcessor 들을 생성한다.
+          <annotation-config> 태그이다.
+          이 태그는 context 네임스페이스 들어 있다. 
+          이 태그를 사용하려면 먼저 context 네임스페이스를 선언해야 한다.
   -->
-  
-      <context:annotation-config/>
-  
+  <context:annotation-config/>
+
   <bean id="c1" class="ch29.h.Car">
     <property name="maker" value="비트자동차"/>
     <property name="model" value="모델1"/>

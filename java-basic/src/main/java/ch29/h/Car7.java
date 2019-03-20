@@ -1,9 +1,6 @@
 package ch29.h;
 
 import java.util.Date;
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 public class Car7 {
   private String maker;
@@ -14,9 +11,12 @@ public class Car7 {
   private Date createdDate;
   private BlackBox blackBox;
   
+  // 생성자에 의존 객체를 파라미터로 선언하면 
+  // 스프링 IoC 컨테이너가 생성자를 호출할 때 
+  // 자동으로 해당 객체를 찾아 주입해 준다.
   public Car7(BlackBox blackBox) {
-    System.out.println("Car7()BlackBox");
-    this.blackBox=blackBox;
+    System.out.println("Car7(BlackBox)");
+    this.blackBox = blackBox;
   }
   
   @Override
@@ -61,7 +61,6 @@ public class Car7 {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
- 
 }
 
 

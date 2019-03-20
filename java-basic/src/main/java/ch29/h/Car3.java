@@ -11,8 +11,8 @@ public class Car3 {
   private boolean auto;
   private Date createdDate;
   
-  
-  
+  // @Autowired를 필드에 붙여도 된다.
+  // => 이런 경우 세터/게터를 제거해도 동작한다.
   @Autowired private BlackBox blackBox;
   
   public Car3() {
@@ -61,7 +61,6 @@ public class Car3 {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
- 
 }
 
 

@@ -8,18 +8,13 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
   
-  
-  
-  
-  <!--  @Autowired 는 세터 뿐만 아니라 필드에 붙여도 된다.
-  필드에 붙이는 경우 게터 세터를 제거해도된다.
-  
+  <!-- @Autowired 는 세터 뿐만 아니라 필드에 붙여도 된다.
+       필드에 붙이는 경우 게터/세터를 제거해도 된다.
   -->
-      <context:annotation-config/>
-  
+  <context:annotation-config/>
+
   <bean id="c1" class="ch29.h.Car2"/>
   <bean id="c2" class="ch29.h.Car3"/>
-  
   
   <bean id="blackBox" class="ch29.h.BlackBox">
     <property name="maker" value="비트오토"/>

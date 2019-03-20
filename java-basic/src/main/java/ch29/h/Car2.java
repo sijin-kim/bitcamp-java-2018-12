@@ -10,6 +10,8 @@ public class Car2 {
   private int valve;
   private boolean auto;
   private Date createdDate;
+  
+  // @Autowired를 필드에 붙여도 된다.
   @Autowired private BlackBox blackBox;
   
   public Car2() {

@@ -6,8 +6,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
   
   <!-- @Autowired 애노테이션을 처리할 BeanPostProcessor를 등록한다.
-  우리가 만든 클래스대신 스프링 ioc 컨테이너에서 제공하는 클래슬 등록한다.
-  
+       우리가 만든 클래스 대신 스프링 IoC 컨테이너에서 제공하는 클래스를 등록한다.
   -->
   <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
   

@@ -12,10 +12,12 @@ public class Car5 {
   private boolean auto;
   private Date createdDate;
   
-  
-  
+  // @Autowired를 필드에 붙여도 된다.
+  // => 이런 경우 세터/게터를 제거해도 동작한다.
+  // => required를 false로 설정하면 해당 객체가 없더라도 오류가 발생하지 않는다.
   @Autowired(required=false)
-  @Qualifier("bb2") 
+  // => 같은 타입의 객체가 여러 개 있을 경우 어떤 객체를 주입해야 하는지 이름을 지정하라!
+  @Qualifier("bb2")
   private BlackBox blackBox;
   
   public Car5() {
@@ -64,7 +66,6 @@ public class Car5 {
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;
   }
- 
 }
 
 

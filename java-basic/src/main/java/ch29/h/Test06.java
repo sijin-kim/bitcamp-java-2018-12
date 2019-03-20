@@ -1,4 +1,4 @@
-// BeanPostProcessor - @Autowired 사용법: 필드에 븉여도된다 .
+// BeanPostProcessor - @Autowired 사용법 : 필수/선택 의존 객체 지정
 package ch29.h;
 
 import org.springframework.context.ApplicationContext;
@@ -12,8 +12,6 @@ public class Test06 {
     System.out.println("---------------------------------------");
     
     System.out.println(iocContainer.getBean("c1"));
-    
-    
   }
 }
 
