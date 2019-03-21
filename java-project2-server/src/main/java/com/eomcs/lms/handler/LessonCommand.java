@@ -14,30 +14,21 @@ import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.PhotoBoard;
+import com.eomcs.lms.service.LessonService;
 
 @Component
 public class LessonCommand {
   
-  LessonDao lessonDao;
-  PhotoBoardDao photoBoardDao;
-  PhotoFileDao photoFileDao;
-  PlatformTransactionManager txManager;
+  LessonService lessonservice;
   
-  public LessonCommand(
-      LessonDao lessonDao,
-      PhotoBoardDao photoBoardDao,
-      PhotoFileDao photoFileDao,
-      PlatformTransactionManager txManager) {
-    this.lessonDao = lessonDao;
-    this.photoBoardDao = photoBoardDao;
-    this.photoFileDao = photoFileDao;
-    this.txManager = txManager;
+  public LessonCommand(LessonService lessonservice) {
+    this.lessonservice=lessonservice;
+  
   }
-  
   
   @RequestMapping("/lesson/list")
   public void list(Response response) throws Exception {
-    List<Lesson> lessons = lessonDao.findAll();
+    List<Lesson> lessons = lessonservice.list();
     for (Lesson lesson : lessons) {
       response.println(String.format("%3d, %-15s, %10s ~ %10s, %4d", 
           lesson.getNo(), lesson.getTitle(), 
@@ -45,6 +36,7 @@ public class LessonCommand {
     }
   }
   
+
   @RequestMapping("/lesson/add")
   public void add(Response response) throws Exception {
     Lesson lesson = new Lesson();
@@ -55,7 +47,7 @@ public class LessonCommand {
     lesson.setTotalHours(response.requestInt("총수업시간?"));
     lesson.setDayHours(response.requestInt("일수업시간?"));
     
-    lessonDao.insert(lesson);
+    lessonservice.add(lesson);
     response.println("저장하였습니다.");
   }
   
@@ -63,7 +55,7 @@ public class LessonCommand {
   public void detail(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    Lesson lesson = lessonDao.findByNo(no);
+    Lesson lesson = lessonservice.get(no);
     if (lesson == null) {
       response.println("해당 번호의 수업이 없습니다.");
       return;
@@ -80,7 +72,7 @@ public class LessonCommand {
   public void update(Response response) throws Exception {
     int no = response.requestInt("번호?");
     
-    Lesson lesson = lessonDao.findByNo(no);
+    Lesson lesson = lessonservice.get(no);
     if (lesson == null) {
       response.println("해당 번호의 수업이 없습니다.");
       return;
@@ -128,7 +120,7 @@ public class LessonCommand {
         || temp.getTotalHours() > 0
         || temp.getDayHours() > 0) {
       
-      lessonDao.update(temp);
+      lessonservice.update(temp);
       response.println("변경했습니다.");
       
     } else {
@@ -139,34 +131,19 @@ public class LessonCommand {
   @RequestMapping("/lesson/delete")
   public void delete(Response response) throws Exception {
     
-    DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-    def.setName("tx1");
-    def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-    TransactionStatus status=  txManager.getTransaction(def);
-    
-    
+  
     try {
       int no = response.requestInt("번호?");
       
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("lessonNo", no);
-      
-      List<PhotoBoard> boards = photoBoardDao.findAll(params);
-      for (PhotoBoard board : boards) {
-        photoFileDao.deleteByPhotoBoardNo(board.getNo());
-        photoBoardDao.delete(board.getNo());
-      }
-      
-      if (lessonDao.delete(no) == 0) {
+      if (lessonservice.delete(no) == 0) {
         response.println("해당 번호의 수업이 없습니다.");
         return;
       }
       response.println("삭제했습니다.");
-      txManager.commit(status);
       
     } catch (Exception e) {
-      txManager.commit(status);
       response.println("삭제 중 오류 발생.");
     }
   }
+ 
 }

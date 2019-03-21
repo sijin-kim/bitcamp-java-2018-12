@@ -10,8 +10,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 //이 클래스는 스프링 IoC 컨테이너를 설정하는 클래스임을 표시한다.
-
 @Configuration
+
 // Mybatis와 스프링 IoC 컨테이너를 연동하는 설정
 // => Database 관련 빈 설정
 

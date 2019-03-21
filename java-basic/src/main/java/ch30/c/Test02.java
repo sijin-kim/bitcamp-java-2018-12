@@ -1,15 +1,13 @@
-// Java config - 자바 클래스로 스프링 IoC 컨테이너 설정하기
-package ch29.j;
+// AOP 사용 후 - AOP 설정 다루기
+package ch30.c;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Test01 {
+public class Test02 {
   public static void main(String[] args) {
-    
-    // java config를 다룰 때는 AnnotationConfigApplicationContext 클래스를 사용한다.
     ApplicationContext iocContainer = 
-        new AnnotationConfigApplicationContext(AppConfig1.class);
+        new ClassPathXmlApplicationContext("ch30/c/application-context-02.xml");
     
     System.out.println("---------------------------------------");
     
@@ -18,6 +16,11 @@ public class Test01 {
       System.out.printf("%s ==> %s\n", 
           name, iocContainer.getBean(name).getClass().getName());
     }
+    
+    System.out.println("---------------------------------------");
+    
+    X x = (X) iocContainer.getBean("x");
+    x.m1();
   }
 }
 

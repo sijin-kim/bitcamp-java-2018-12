@@ -14,40 +14,39 @@ public class AppConfig4 {
   // 스프링 IoC 컨테이너는 이 메소드를 호출한 후 그 리턴 값을 메서드 이름으로 저장한다.
   // 만약 @Bean 애노테이션이 따로 이름을 지정한다면 그 이름으로 리턴 값을 저장한다.
   // 
- 
   @Bean
   public BlackBox blackBox() {
-    
-    BlackBox obj= new BlackBox();
-    obj.setMaker("시진메이커");
-    obj.setModel("시진정밀블랙박스");
+    // 이 메서드의 이름이 리턴 값을 저장하는 이름으로 사용되기 때문에 
+    // 메서드의 이름을 명사 형태로 짓는다.
+    BlackBox obj = new BlackBox();
+    obj.setMaker("비트박스");
+    obj.setModel("비트비트");
     return obj;
-    
   }
   
+  // 스프링 IoC 컨테이너로부터 객체를 주입받고 싶다면 파라미터에 선언하라.
   @Bean
-  public Car car1(BlackBox blackBox) {
-    Car c = new Car();
-    c.setMaker("시진메이커");
-    c.setModel("시진제트기");
-    c.setCc(20000);
-    c.setBlackBox(blackBox);
-    return c;
-    
+  public Car car1(Sub1Car sub1Car) {
+    Car obj = new Car();
+    obj.setMaker("비트자동차");
+    obj.setModel("모델1");
+    obj.setAuto(true);
+    obj.setBlackBox(sub1Car.getBlackBox());
+    return obj;
   }
   
+  //스프링 IoC 컨테이너를 파라미터로 주입 받을 수 있다.
   @Bean
   public Car car2(ApplicationContext iocContainer) {
-    BlackBox a = (BlackBox) iocContainer.getBean("blackBox");
-    Car c1= new Car();
-    c1.setMaker("승빈메이커");
-    c1.setModel("승빈로켓");
-    c1.setCc(20000);
-    c1.setBlackBox(a);
+    BlackBox bb = (BlackBox)iocContainer.getBean("blackBox");
     
-    return c1;
-   
+    Car obj = new Car();
+    obj.setMaker("비트자동차");
+    obj.setModel("모델2");
+    obj.setAuto(false);
+    obj.setBlackBox(bb);
     
+    return obj;
   }
   
 }

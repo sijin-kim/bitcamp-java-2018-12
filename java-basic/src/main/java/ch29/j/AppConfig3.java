@@ -17,9 +17,6 @@ import org.springframework.context.annotation.FilterType;
           pattern="ch29.j.AppConfig2"
       )}
 )
-
-
-
 public class AppConfig3 {
 
 }
