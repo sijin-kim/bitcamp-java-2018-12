@@ -1,14 +1,12 @@
 package com.eomcs.lms.service;
 
 import java.util.List;
-import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Member;
 
 public interface MemberService {
-  List<Member> list(); // findAll 
- int add(Member member); // insert
-  Member get(int no);   //detail == findbyno
+  List<Member> list(String keyword);
+  int add(Member member);
+  Member get(int no);
   int update(Member member);
-  List<Member> findByKeyword(String keyword);
-   int delete(int no);
+  int delete(int no);
 }

@@ -30,7 +30,7 @@ public class DatabaseConfig {
   }
   
   @Bean
-  public PlatformTransactionManager transationManager(DataSource dataSource) {
+  public PlatformTransactionManager transactionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);
   }
 }

@@ -1,7 +1,6 @@
 package com.eomcs.lms.service;
 
 import java.util.List;
-import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Lesson;
 
 public interface LessonService {

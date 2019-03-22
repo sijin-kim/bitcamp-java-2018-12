@@ -2,22 +2,21 @@ package com.eomcs.lms.handler;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.context.RequestMapping;
-import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
 @Component
 public class MemberCommand {
   
-  MemberService memberservice;
+  MemberService memberService;
   
-  public MemberCommand(MemberService memberservice) {
-    this.memberservice = memberservice;
+  public MemberCommand(MemberService memberService) {
+    this.memberService = memberService;
   }
   
   @RequestMapping("/member/list")
   public void list(Response response) throws Exception {
-    List<Member> members = memberservice.list();
+    List<Member> members = memberService.list(null);
     for (Member member : members) {
       response.println(String.format("%3d, %-4s, %-20s, %-15s, %s", 
           member.getNo(), member.getName(), 
@@ -34,7 +33,7 @@ public class MemberCommand {
     member.setPhoto(response.requestString("사진?"));
     member.setTel(response.requestString("전화?"));
 
-    memberservice.add(member);
+    memberService.add(member);
     response.println("저장하였습니다.");
   }
   
@@ -42,7 +41,7 @@ public class MemberCommand {
   public void detail(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    Member member = memberservice.get(no);
+    Member member = memberService.get(no);
     if (member == null) {
       response.println("해당 번호의 회원이 없습니다.");
       return;
@@ -59,7 +58,7 @@ public class MemberCommand {
   public void update(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    Member member = memberservice.get(no);
+    Member member = memberService.get(no);
     if (member == null) {
       response.println("해당 번호의 회원이 없습니다.");
       return;
@@ -98,7 +97,7 @@ public class MemberCommand {
         || temp.getPhoto() != null
         || temp.getTel() != null) {
       
-      memberservice.update(temp);
+      memberService.update(temp);
       response.println("변경했습니다.");
       
     } else {
@@ -106,12 +105,11 @@ public class MemberCommand {
     }
   }
   
-  
   @RequestMapping("/member/delete")
   public void delete(Response response) throws Exception {
     int no = response.requestInt("번호?");
 
-    if (memberservice.delete(no) == 0) {
+    if (memberService.delete(no) == 0) {
       response.println("해당 번호의 회원이 없습니다.");
       return;
     }
@@ -122,7 +120,7 @@ public class MemberCommand {
   public void search(Response response) throws Exception {
     
     String keyword = response.requestString("검색어?");
-    List<Member> members = memberservice.findByKeyword(keyword);
+    List<Member> members = memberService.list(keyword);
 
     for (Member member : members) {
       response.println(String.format("%3d, %-4s, %-20s, %-15s, %s", 

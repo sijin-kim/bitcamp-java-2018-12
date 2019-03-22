@@ -7,7 +7,7 @@ import com.eomcs.lms.service.BoardService;
 
 @Component
 public class BoardCommand {
-
+  
   BoardService boardService;
   
   public BoardCommand(BoardService boardService) {
@@ -17,6 +17,10 @@ public class BoardCommand {
   @RequestMapping("/board/list")
   public void list(Response response) {
     List<Board> boards = boardService.list();
+    response.println("<html><head><title> 게시물목록</title></head>");
+    response.println("<body><h1> 게시물목록</h1>");
+
+    
     
     for (Board board : boards) {
       response.println(
