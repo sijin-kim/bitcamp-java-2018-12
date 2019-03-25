@@ -17,7 +17,6 @@ public class PhotoBoard implements Serializable {
   private Lesson lesson;
   private List<PhotoFile> files;
   
-  
   public int getNo() {
     return no;
   }
