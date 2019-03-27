@@ -18,12 +18,10 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/list")
-  public void list(ServletRequest request, ServletResponse response) throws Exception{
+  public void list(ServletRequest request, ServletResponse response) throws Exception {
     List<Board> boards = boardService.list();
     
-   
     PrintWriter out = response.getWriter();
-    
     out.println("<html><head><title>게시물 목록</title></head>");
     out.println("<body><h1>게시물 목록</h1>");
     out.println("<p><a href='form'>새 글</a></p>");

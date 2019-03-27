@@ -16,26 +16,47 @@
 // 3) ServletApp 변경
 //    => 'Servlet'이라는 규칙에 따라 클래스를 변경한다.
 //    => 이 규칙에 따라 작성해야만 톰캣 서버가 호출해 줄 것이다.
+//    => ServletRequest와 ServletResponse 클래스를 제거한다.
+// 4) Command 변경
+//    => ServletRequest와 ServletResponse를 
+//       servlet-api 에서 제공하는 인터페이스로 바꾼다.
 // 4) 자바 웹 배포 파일을 생성
 //    => '$ gradle build' 실행
-// 
 // 5) 웹 배포 파일을 톰캣 서버에 배치한다.
 //    => $톰캣홈/webapps/ 폴더에 *.war 파일을 둔다.
 //    => 톰캣 서버를 다시 실행한다.
 //       '$톰캣홈/bin$ ./shutdown.sh'
 //       '$톰캣홈/bin$ ./startup.sh'
+//    => 톰캣 서버를 실행하면 .war 파일이 자동으로 풀리고 서버에 설정된다.
 // 6) 웹 애플리케이션 실행하기
-// 7) 웹 애플리케이션 자동배포하기
-//    1) 이클립스에서 톰캣 서버 경로를 설정한다.
-//          - 
-//    1) 웹 애플리케이션 테스트용 
-//    이클립스에 서버 테스트 환경을 다룰 server 프로젝트가 추가된다
-//  물론 기존에 있다면  테스트 환경을 위한 설정 파일을 담은 폴더만 추가된다.
-//  생성된 배치 폴더의 경로
-//  이클립스워크스페이스폴더/
-//   외부에서 별도로 톸캣 서버를 실행했다면 종료하
+//    => http://localhost:8080/프로젝트명/board/list
 // 
-// 
+// [웹 애플리케이션 자동 배포하기]
+// 1) 이클립스에 톰캣 서버 경로를 설정한다.
+//    - Window/Preference 메뉴 클릭
+//    - Server 노드 선택
+//    - Runtime Environments 노드 선택
+//    - OS 에 설치한 톰캣 서버의 경로를 등록
+// 2) 웹 애플리케이션을 테스트 할 때 사용할 톰캣 배치 폴더 생성
+//    - 'Servers' 뷰 선택 
+//    - New/Server 메뉴 클릭
+//    - 이클립스에 등록된 서버 중에서 테스트 환경을 구축할 서버 선택
+//    - 서버 이름 지정한 후 확인 클릭
+//    - 이클립스에 서버 테스트 환경을 다룰 'Servers' 프로젝트가 추가된다.
+//      물론 기존에 있다면 테스트 환경을 위한 설정 파일을 담은 폴더만 추가된다.
+//    - 생성된 배치 폴더의 경로
+//      이클립스워크스페이스폴더/.metadata/.plugins/org.eclipse.wst.server.core/
+// 3) 웹 애플리케이션을 테스트 용으로 만든 배치 폴더에 배포한다.
+//    - 'gradle build'를 실행할 필요가 없다.
+//    - 'Servers' 뷰 선택
+//    - 테스트 서버에 대해 컨텍스트 메뉴 출력 
+//    - 'Add and Remove...' 메뉴 선택
+//    - 배포할 웹 프로젝트를 선택하여 추가하다.
+//    - 외부에서 별도로 톰캣 서버를 실행했다면 종료하라!
+// 4) 테스트 용으로 설정한 톰캣 서버 실행
+//    - 'Servers' 뷰 선택
+//    - 테스트 서버에 대해 컨텍스트 메뉴 출력
+//    - Start/Stop 실행
 package com.eomcs.lms;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,7 +74,7 @@ import com.eomcs.lms.context.RequestMappingHandlerMapping;
 import com.eomcs.lms.context.RequestMappingHandlerMapping.RequestMappingHandler;
 
 @WebServlet("/*")
-public class ServerApp implements Servlet{
+public class ServerApp implements Servlet {
   // 보통 클래스에서 사용할 로그 출력 객체는 클래스의 스태틱 멤버로 선언한다.
   final static Logger logger = LogManager.getLogger(ServerApp.class);
 
@@ -71,11 +92,13 @@ public class ServerApp implements Servlet{
     // => 보통 이 클래스가 작업하는데 필요한 객체를 준비한다.
 
     this.config = config;
+    
 
     logger.info("Spring IoC 컨테이너 준비");
     iocContainer = new AnnotationConfigApplicationContext(AppConfig.class);
     printBeans();
 
+    
     logger.info("RequestMappingHandlerMapping 객체 준비");
     handlerMapping = 
         (RequestMappingHandlerMapping) iocContainer.getBean(
@@ -117,12 +140,14 @@ public class ServerApp implements Servlet{
     }
   }
   
+ 
   @Override
   public void destroy() {
     // 서버를 종료하거나 웹 애플리케이션을 종료할 때 
     // 생성된 모든 서블릿 객체는 소멸될 것이다.
     // 그래서 소멸되기 전에 사용한 자원을 해제시키기 위해 톰캣이 이 메서드를 호출한다.
     // => 즉 init()에서 준비한 자원은 이 메서드에서 해제시켜라!
+   
   }
   
   @Override
