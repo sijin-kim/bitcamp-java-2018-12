@@ -13,14 +13,9 @@ import javax.servlet.ServletResponse;
 // => 따라서 이 클래스를 상속 받는 서브 클래스는 service() 만 구현하면 된다.
 public class Servlet02 extends GenericServlet {
   
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-
   // GenericServlet 추상 클래스는 java.io.Serialize 인터페이스를 구현하였다.
   // => serialVersionUID 변수 값을 설정해야 한다.
- 
+  private static final long serialVersionUID = 1L;
 
   
   @Override

@@ -92,13 +92,11 @@ public class ServerApp implements Servlet {
     // => 보통 이 클래스가 작업하는데 필요한 객체를 준비한다.
 
     this.config = config;
-    
 
     logger.info("Spring IoC 컨테이너 준비");
     iocContainer = new AnnotationConfigApplicationContext(AppConfig.class);
     printBeans();
 
-    
     logger.info("RequestMappingHandlerMapping 객체 준비");
     handlerMapping = 
         (RequestMappingHandlerMapping) iocContainer.getBean(
@@ -140,14 +138,12 @@ public class ServerApp implements Servlet {
     }
   }
   
- 
   @Override
   public void destroy() {
     // 서버를 종료하거나 웹 애플리케이션을 종료할 때 
     // 생성된 모든 서블릿 객체는 소멸될 것이다.
     // 그래서 소멸되기 전에 사용한 자원을 해제시키기 위해 톰캣이 이 메서드를 호출한다.
     // => 즉 init()에서 준비한 자원은 이 메서드에서 해제시켜라!
-   
   }
   
   @Override

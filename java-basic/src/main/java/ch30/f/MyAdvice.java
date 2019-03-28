@@ -20,8 +20,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class MyAdvice {
   
-  
-  @Pointcut("execution(* ch30.f.X.*(..)) ")
+  // Pointcut을 미리 정의한다.
+  // => 메서드 선언부에 붙여야 한다.
+  // => 메서드의 파라미터는 없고, 구현을 비워둔다.
+  // => 이 메서드는 pointcut을 지정하는 용도로만 사용한다.
+  @Pointcut("execution(* ch30.f.X.*(..))")
   public void calculatorOperation() {}
   
   /*
@@ -50,7 +53,7 @@ public class MyAdvice {
           method="doAfterReturning" />
    */
   @AfterReturning(
-      pointcut="calculatorOperation() ", 
+      pointcut="calculatorOperation()", 
       returning="rv")
   public void doAfterReturning(Object rv) {
     System.out.printf("%s.doAfterReturning()\n", this.getClass().getName());
@@ -63,7 +66,7 @@ public class MyAdvice {
           method="doAfterThrowing" />
    */
   @AfterThrowing(
-      pointcut="calculatorOperation() ", 
+      pointcut="calculatorOperation()", 
       throwing="err")
   public void doAfterThrowing(Exception err) {
     System.out.printf("%s.doAfterThrowing()\n", this.getClass().getName());

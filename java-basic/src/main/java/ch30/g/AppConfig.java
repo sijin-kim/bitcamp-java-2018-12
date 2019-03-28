@@ -5,10 +5,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @ComponentScan("ch30.g")
 
+// AOP 활성화시키기
+// => XML에서는 <aop:aspectj-autoproxy/> 태그를 선언하였다.
 @EnableAspectJAutoProxy
-//AOP활성화 시키기
-// XML에서는 <
-public class AppConfig {
 
-  
+public class AppConfig {
 }

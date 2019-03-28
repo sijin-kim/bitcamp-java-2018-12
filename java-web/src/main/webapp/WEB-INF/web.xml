@@ -11,32 +11,58 @@
 
   <display-name>웹 애플리케이션의 이름</display-name>
 
+  <!-- 리스너 배치 정보 -->
+  <listener>
+    <listener-class>bitcamp.ex02.Listener01</listener-class>
+  </listener>
+  <listener>
+    <listener-class>bitcamp.ex02.Listener02</listener-class>
+  </listener>
+
+
+  <!-- 필터 배치 정보 -->
+  <filter>
+    <filter-name>f1</filter-name>
+    <filter-class>bitcamp.ex02.Filter01</filter-class>
+  </filter>
+  <filter>
+    <filter-name>f2</filter-name>
+    <filter-class>bitcamp.ex02.Filter02</filter-class>
+  </filter>
+  
+  
+  
+  
+  
+  <!-- 필터를 언제 실행할 지 결정하기 위해 URL을 지정한다. -->
+  <filter-mapping>
+    <filter-name>f1</filter-name>
+    <url-pattern>/ex02/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>f2</filter-name>
+    <url-pattern>/ex02/a/s2</url-pattern>
+  </filter-mapping>
+  
+  <!--  필터를 언제 실행할지 결정하기 위해 url을 지정한다 -->
+  
+
+
+
   <!-- 서블릿 배치 정보 설정
        => 웹 애플리케이션에 어떤 서블릿이 있는지 지정한다. -->
   <servlet>
     <servlet-name>Servlet01</servlet-name>
     <servlet-class>bitcamp.ex01.Servlet01</servlet-class>
   </servlet>
-  
   <servlet>
     <servlet-name>Servlet02</servlet-name>
     <servlet-class>bitcamp.ex01.Servlet02</servlet-class>
   </servlet>
-  
   <servlet>
     <servlet-name>Servlet03</servlet-name>
     <servlet-class>bitcamp.ex01.Servlet03</servlet-class>
   </servlet>
-  
-  
-  <servlet>
-  <servlet-name>sos</servlet-name>
-  <servlet-class>bitcamp.ex01/Servlet05</servlet-class>
-  </servlet>
-  
-  
-  
-  
   
   <!-- 서블릿에 URL을 지정한다.
        => URL이 지정된 서블릿은 웹브라우저 쪽에서 그 URL로 실행을 요청할 수 있다.
@@ -51,26 +77,14 @@
          반드시 루트 / 로 시작한다. -->
     <url-pattern>/ex01/s01</url-pattern>
   </servlet-mapping>
-  
-  
-  
   <servlet-mapping>
     <servlet-name>Servlet02</servlet-name>
     <url-pattern>/ex01/s02</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet-mapping>
     <servlet-name>Servlet03</servlet-name>
     <url-pattern>/ex01/s03</url-pattern>
   </servlet-mapping>
-  
-  <servlet-mapping>
-  
-  <servlet-name>sos</servlet-name>
-  <url-pattern>/ex01/so8</url-pattern>
-  </servlet-mapping>
-  
   
   
 </web-app>
