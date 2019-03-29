@@ -1,18 +1,36 @@
 // 멀티파트 파일 업로드 처리하기 - apache 라이브러리 사용
 package bitcamp.ex04;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.GenericServlet;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet("/ex04/s4")
 public class Servlet04 extends GenericServlet {
   
   private static final long serialVersionUID = 1L;
+  private  String uploadDir;
+  
+  @Override
+  public void init() throws ServletException {
+    // 이 매서드는 init (servletconfig)가 호출될 때 이 메서드도 호출된다.
+    
+    this.uploadDir=this.getServletContext().getRealPath("/upload");
+    
+  }
 
   @Override
   public void service(ServletRequest req, ServletResponse res)
@@ -37,19 +55,93 @@ public class Servlet04 extends GenericServlet {
     // 테스트
     // - http://localhost:8080/java-web/ex04/test04.html 실행
     //
-    req.setCharacterEncoding("UTF-8");
+   // req.setCharacterEncoding("UTF-8");
 
     // getParameter()가 null을 리턴한다는 것을 확인하기 위해 
     // 파라미터 모두 String으로 받는다.
+    // => 멀티 파트 형식으로 전송된 데이터는 getparameter ()로 꺼낼수 없다.
+    
+    /*
     String age = req.getParameter("age");
     String name = req.getParameter("name");
     String photo = req.getParameter("photo");
+   
     
     res.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = res.getWriter();
     out.printf("이름=%s\n", name);
     out.printf("나이=%s\n", age);
     out.printf("사진=%s\n", photo);
+     */
+    
+    // 멀티파트 형식의 데이터 처리하기
+    //1)apache라이브러리 가져온다.
+     // 2)apache commons -fileupload 문서에 따하 코딩한다.
+    // => 멀티파트 데이터를 분석하여 fileitem 객체에 담아 줄 공장을 준비한다.
+    DiskFileItemFactory fileItemFactory= new DiskFileItemFactory();
+    
+    // 공장 객체를 사용하여 클라이언트가 보낸 데이터를 처리할 객체준비
+    ServletFileUpload multipartDataHandler = new ServletFileUpload(fileItemFactory);
+    
+        //=> 분석한 데이터를 보관할 맵 객체를 준비한다.
+    HashMap<String,String> paramMap= new HashMap<>();
+    
+    
+    
+    
+    try{
+   List<FileItem> parts = multipartDataHandler.parseRequest((HttpServletRequest)req);
+    
+   
+   for(FileItem part : parts) {
+     if(part.isFormField()) {
+       
+       paramMap.put(part.getFieldName(),part.getString("UTF-8"));
+     }else {
+       // 파트의 데이터가 파일이라면
+       // => upload /디렉토리에 파일을 저장한다.
+       // 1) 파일을 저정할 디렉토리 경로를  준비한다.
+      
+       //업로드 파일을 저장할 떄 사용할 파일명을 준비한다.
+       // => 원래 파일명을 사용하지 않는다.
+       //=> 다른 클라이언트가 같은
+       
+       String filename = UUID.randomUUID().toString();
+       
+       
+       
+       //2) 전체 파일 경로를 준비한다.
+       File file = new File(this.uploadDir + "/"+ filename);
+       
+       
+       //3)파일 경로에 업로드 파일을 저장한다.
+       
+       part.write(file);
+       
+      paramMap.put(part.getFieldName(),filename);
+
+     }
+   }
+   
+   res.setContentType("text/html;charset=UTF-8");
+   PrintWriter out = res.getWriter();
+   out.printf("<html>");
+   out.printf("<head><title>servlet04</title></head>");
+   out.printf(" <body><h1>파일 업로드 결과</h1>");
+   out.printf("이름=%s<br>\n", paramMap.get("name"));
+   out.printf("나이=%s<br>\n", paramMap.get("age"));
+   out.printf("사진=%s<br>\n", paramMap.get("photo"));
+   out.printf("<img src='../upload/%s'><br>\n",paramMap.get("photo"));
+   out.printf("</body></html>");
+   
+   
+    }catch (Exception e){
+      e.printStackTrace();
+    }
+    
+    
+    
+    
   }
 }
 

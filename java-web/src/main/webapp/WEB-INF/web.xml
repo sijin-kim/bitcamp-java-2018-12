@@ -59,9 +59,14 @@
     <servlet-name>Servlet02</servlet-name>
     <servlet-class>bitcamp.ex01.Servlet02</servlet-class>
   </servlet>
+  
   <servlet>
-    <servlet-name>Servlet03</servlet-name>
-    <servlet-class>bitcamp.ex01.Servlet03</servlet-class>
+    <servlet-name>bitcamp.ex04.Servlet05</servlet-name>
+    <servlet-class>bitcamp.ex04.Servlet05</servlet-class>
+    <!--  멀티파트 데이터를 처리할려면 다음 테그를 선언해야한다. -->
+    <multipart-config>
+    <max-file-size>10000000</max-file-size>
+    </multipart-config>
   </servlet>
   
   <!-- 서블릿에 URL을 지정한다.
@@ -81,9 +86,10 @@
     <servlet-name>Servlet02</servlet-name>
     <url-pattern>/ex01/s02</url-pattern>
   </servlet-mapping>
+  
   <servlet-mapping>
-    <servlet-name>Servlet03</servlet-name>
-    <url-pattern>/ex01/s03</url-pattern>
+    <servlet-name>bitcamp.ex04.Servlet05</servlet-name>
+    <url-pattern>/ex04/s5</url-pattern>
   </servlet-mapping>
   
   
