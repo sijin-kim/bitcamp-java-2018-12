@@ -1,4 +1,4 @@
-// 보관소에 저장된 값 꺼내기-forword/include servletrequest 공유하는 것 테스트
+// 보관소에 저장된 값 꺼내기 - forward/include 서블릿끼리 ServletRequest 공유하는 것 테스트
 package bitcamp.ex09;
 
 import java.io.IOException;
@@ -23,33 +23,29 @@ public class Servlet12 extends HttpServlet {
     
     // 테스트 방법:
     // => http://localhost:8080/java-web/ex09/s11
+    //
     
-    //1)servlet context 보관소에 값 꺼내기
+    // 1) ServletContext 보관소에 저장된 값 꺼내기
+    ServletContext sc = this.getServletContext();
+    String v1 = (String) sc.getAttribute("v1");
     
-    ServletContext sc= this.getServletContext();
-    String v1 =(String)sc.getAttribute("v1");
-    
-    
-    //2) httpsession 보관소에 값넣기
-    // => 이 요청을 한 클라이언트의 httpsession 객체가 없다면 만들어준다.
-    // => 이미 이 클라이언트 위해 만든 객체가 있다면 그 객체를 리턴한다.
-    
+    // 2) HttpSession 보관소에 저장된 값 꺼내기
+    // => 이 요청을 한 클라이언트의 HttpSession 객체가 없다면 만들어준다.
+    // => 이미 이 클라이언트를 위해 만든 객체가 있다면 그 객체를 리턴한다.
     HttpSession session = request.getSession();
-    String v2 =(String)session.getAttribute("v2");
+    String v2 = (String) session.getAttribute("v2");
     
-    String v3 = (String)request.getAttribute("v3");
+    // 3) ServletRequest 보관소에 저장된 값 꺼내기
+    String v3 = (String) request.getAttribute("v3");
     
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
-    out.println("보관소에 저장된 값 꺼내기 /ex09/s12");
-    
-    out.printf("v1=%s\n",v1);
-    out.printf("v2=%s\n",v2);
-    out.printf("v3=%s\n",v3);
-    
-    
-    
+    out.println("보관소에 저장된 값 꺼내기 - /ex09/s12");
+    out.printf("v1 = %s\n", v1);
+    out.printf("v2 = %s\n", v2);
+    out.printf("v3 = %s\n", v3);
+
   }
 }
 

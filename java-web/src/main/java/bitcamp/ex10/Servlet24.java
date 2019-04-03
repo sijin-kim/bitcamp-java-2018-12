@@ -1,17 +1,18 @@
-// 리프래시 또는 리다이렉트 최종 요청 페이지
-package bitcamp.ex08;
+// 쿠키(cookie) 읽기 - 사용 범위가 지정된 쿠키 읽기
+package bitcamp.ex10;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ex08/s100")
+@WebServlet("/ex10_1/s24")
 @SuppressWarnings("serial")
-public class Servlet100 extends HttpServlet {
+public class Servlet24 extends HttpServlet {
   
   @Override
   protected void service(
@@ -19,13 +20,22 @@ public class Servlet100 extends HttpServlet {
       HttpServletResponse response)
       throws ServletException, IOException {
     
-    // 이 서블릿은 직접 실행할 용도로 만든 것이 아니다.
-    // 리프래시와 리다이렉트를 연습할 용도로 만들었다.
-    // 
+    // 테스트 방법:
+    // => http://localhost:8080/java-web/ex10_1/s24
+    //
+    
+    Cookie[] cookies = request.getCookies();
+    
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
+
+    if (cookies != null) {
+      for (Cookie c : cookies) {
+        out.printf("%s=%s\n", c.getName(), c.getValue());
+      }
+    }
     
-    out.println("반가워요 - /ex08/s100");
-   }
+  }
 }
+
 

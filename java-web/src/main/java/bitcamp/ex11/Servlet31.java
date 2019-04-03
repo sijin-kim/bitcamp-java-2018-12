@@ -1,5 +1,5 @@
-// 리프래시 또는 리다이렉트 최종 요청 페이지
-package bitcamp.ex08;
+// 세션(session) 무효화시키기
+package bitcamp.ex11;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,24 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/ex08/s100")
+@WebServlet("/ex11/s31")
 @SuppressWarnings("serial")
-public class Servlet100 extends HttpServlet {
+public class Servlet31 extends HttpServlet {
   
   @Override
-  protected void service(
-      HttpServletRequest request, 
-      HttpServletResponse response)
+  protected void doGet(
+      HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
-    // 이 서블릿은 직접 실행할 용도로 만든 것이 아니다.
-    // 리프래시와 리다이렉트를 연습할 용도로 만들었다.
-    // 
+    HttpSession session = request.getSession();
+    session.setAttribute("v1", "aaa");
+    
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    
-    out.println("반가워요 - /ex08/s100");
-   }
+    out.println("/ex11/s31 실행함!");
+  }
 }
+
 

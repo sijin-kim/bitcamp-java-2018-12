@@ -34,8 +34,6 @@ public class Servlet11 extends HttpServlet {
     
     RequestDispatcher 요청배달자 = null; 
     
-   
-    
     if (op.equals("+")) {
       요청배달자 = request.getRequestDispatcher("/ex07/s11_plus");
     } else if (op.contentEquals("-")) {

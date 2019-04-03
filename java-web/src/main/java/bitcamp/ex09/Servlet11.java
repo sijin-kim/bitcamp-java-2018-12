@@ -1,8 +1,7 @@
-// 보관소에 값넣기 -forword/include servletrequest 공유하는 것 테스트
+// 보관소에 값 넣기 - forward/include 서블릿끼리 ServletRequest 공유하는 것 테스트
 package bitcamp.ex09;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,32 +21,29 @@ public class Servlet11 extends HttpServlet {
       throws ServletException, IOException {
     
     // 테스트 방법:
-    // => http://localhost:8080/java-web/ex09/s1
+    // => http://localhost:8080/java-web/ex09/s11
+    //
     
-    //1)servlet context 보관소에 값 넣기
-    
-    ServletContext sc= this.getServletContext();
+    // 1) ServletContext 보관소에 값 넣기
+    ServletContext sc = this.getServletContext();
     sc.setAttribute("v1", "xxx");
     
-    //2) httpsession 보관소에 값넣기
-    // => 이 요청을 한 클라이언트의 httpsession 객체가 없다면 만들어준다.
-    // => 이미 이 클라이언트 위해 만든 객체가 있다면 그 객체를 리턴한다.
+    // 2) HttpSession 보관소에 값 넣기
+    // => 이 요청을 한 클라이언트의 HttpSession 객체가 없다면 만들어준다.
+    // => 이미 이 클라이언트를 위해 만든 객체가 있다면 그 객체를 리턴한다.
     HttpSession session = request.getSession();
     session.setAttribute("v2", "yyy");
     
+    // 3) ServletRequest 보관소에 값 넣기
+    request.setAttribute("v3", "zzz");
     
-    request.setAttribute("v3", "ggg");
-    
-    //주목!
-    // => 포워드(인클루드 포함) 할 때 이 서블릿이 파리미터로 받은
-    // servletrequest와 servletreqponse 를 전달한다.
-    // => 따라서 포워드/인클루드 서블릿들은 응답을 완료할때까지 이 객체들을 공유하는 것이다.
+    // 주목!
+    // => 포워드(인클루드 포함)할 때 이 서블릿이 파라미터로 받은 
+    //    ServletRequest와 ServletResponse를 전달한다.
+    // => 따라서 포워드/인클루드 서블릿들은 응답을 완료할 때까지 이 객체들을 공유하는 것이다.
+    //
     request.getRequestDispatcher("s12").forward(request, response);
-    
-    
-    
-    
-    
+
   }
 }
 
