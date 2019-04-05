@@ -27,32 +27,18 @@ public class MemberSearchServlet extends HttpServlet {
     
     String keyword = request.getParameter("keyword");
     List<Member> members = memberService.list(keyword);
+    
+    if (members == null) {
+      request.setAttribute("error/title", "회원 번호가 없습니다.");
+      request.setAttribute("error.content", "해당번호의 회원이없습니다.");
+      request.getRequestDispatcher("/error.jsp").forward(request, response);
+    }
+    
+    request.setAttribute("search", members);
 
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>회원 검색</title></head>");
-    out.println("<body>");
     
-    // 헤더를 출력한다.
-    request.getRequestDispatcher("/header").include(request, response);
-    
-    out.println("<h1>회원 검색</h1>");
-    out.println("<table border='1'>");
-    out.println("<tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>가입일</th></tr>");
-    
-    for (Member member : members) {
-      out.println(String.format(
-          "<tr><td>%d</td><td><a href='detail?no=%1$d'>%s</a></td>"
-          + "<td>%s</td><td>%s</td><td>%s</td></tr>", 
-          member.getNo(), 
-          member.getName(), 
-          member.getEmail(), 
-          member.getTel(), 
-          member.getRegisteredDate()));
-    }
-    out.println("</table>");
-    out.println("<p><a href='list'>목록</a></p>");
-    out.println("</body></html>");
+    request.getRequestDispatcher("/member/serach.jsp").include(request, response);
   }
   
 }

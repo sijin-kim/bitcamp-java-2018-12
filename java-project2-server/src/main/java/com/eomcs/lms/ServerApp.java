@@ -83,6 +83,7 @@ public class ServerApp implements Servlet {
 
   // 클라이언트 요청을 처리할 메서드 정보가 들어 있는 객체
   RequestMappingHandlerMapping handlerMapping;
+  
 
   ServletConfig config;
   
