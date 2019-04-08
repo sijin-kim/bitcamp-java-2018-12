@@ -29,16 +29,14 @@ public class BoardDetailServlet extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
     
     Board board = boardService.get(no);
-    // jsp가 사용할수있도록 servletrequset 에 보관소에 저장해둔다.
+    
+    // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장해둔다.
     request.setAttribute("board", board);
     
     response.setContentType("text/html;charset=UTF-8");
-    // jsp 실행을 포함시킨다.
     
+    // JSP의 실행을 포함시킨다.
     request.getRequestDispatcher("/board/detail.jsp").include(request, response);
-    
-    
-    
   }
 
 }

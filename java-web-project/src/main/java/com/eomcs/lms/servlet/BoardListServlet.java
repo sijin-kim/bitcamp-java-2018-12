@@ -30,18 +30,15 @@ public class BoardListServlet extends HttpServlet {
     
     List<Board> boards = boardService.list();
     
-    // jsp 가 게시물 목록을 다룰수있도록 servletrequet 보관소에 저장한다.
-    
-    request.setAttribute("list",boards);
+    // JSP가 게시물 목록을 다룰 수 있도록 ServletRequest 보관소에 저장한다.
+    request.setAttribute("list", boards);
     
     response.setContentType("text/html;charset=UTF-8");
     
-    // jsp의 실행을 포함시킨다.
-     RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
-     rd.include(request, response);
-    
+    // JSP의 실행을 포함시킨다.
+    RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
+    rd.include(request, response);
   }
-
 }
 
 

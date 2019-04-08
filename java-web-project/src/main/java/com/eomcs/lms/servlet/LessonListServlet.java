@@ -25,12 +25,12 @@ public class LessonListServlet extends HttpServlet {
         (ApplicationContext) sc.getAttribute("iocContainer");
     LessonService lessonService = iocContainer.getBean(LessonService.class);
     List<Lesson> lessons = lessonService.list();
-
-    response.setContentType("text/html;charset=UTF-8");
-    request.setAttribute("list",lessons);    
-    request.getRequestDispatcher("/lesson/list.jsp").include(request, response);
     
-  
+    request.setAttribute("list", lessons);
+    
+    response.setContentType("text/html;charset=UTF-8");
 
+    // JSP의 실행을 포함시킨다.
+    request.getRequestDispatcher("/lesson/list.jsp").include(request, response);
   }
 }

@@ -16,7 +16,6 @@
     <listener-class>com.eomcs.lms.listener.ContextLoaderListener</listener-class>
   </listener>
   
-  
 <!-- 필터 선언 -->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>

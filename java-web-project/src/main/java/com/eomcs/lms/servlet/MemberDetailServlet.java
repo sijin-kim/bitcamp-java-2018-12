@@ -19,18 +19,17 @@ public class MemberDetailServlet extends HttpServlet {
       throws ServletException, IOException {
 
     ServletContext sc = this.getServletContext();
-    ApplicationContext iocContainer = 
-        (ApplicationContext) sc.getAttribute("iocContainer");
+    ApplicationContext iocContainer = (ApplicationContext) sc.getAttribute("iocContainer");
     MemberService memberService = iocContainer.getBean(MemberService.class);
 
     int no = Integer.parseInt(request.getParameter("no"));
-    
-    Member member = memberService.get(no);
-    
-    request.setAttribute("member", member);
 
-    response.setContentType("text/html;charset=UTF-8");
+    Member member = memberService.get(no);
+
+    request.setAttribute("member", member);
     
+    response.setContentType("text/html;charset=UTF-8");
+
     request.getRequestDispatcher("/member/detail.jsp").include(request, response);
   }
 }

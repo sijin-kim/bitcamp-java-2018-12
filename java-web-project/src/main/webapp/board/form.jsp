@@ -1,21 +1,14 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
   trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
-<htm>
+<html>
 <head>
 <title>새 글</title>
 </head>
-
 <body>
 
 <jsp:include page="/header.jsp"/>
 
-  <header>
-    <img src='http://bitcamp.co.kr/img/logo.jpg' style='height: 50px'> <img
-      src='/java-web-project/upload/member/null' style='height: 20px;'> 김시진<a
-      href='/java-web-project/auth/logout'>로그아웃</a>
-  </header>
   <h1>새 글(JSP)</h1>
   <form action='add' method='post'>
     <table border='1'>
