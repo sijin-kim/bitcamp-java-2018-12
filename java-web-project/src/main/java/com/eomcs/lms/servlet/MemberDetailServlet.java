@@ -28,8 +28,8 @@ public class MemberDetailServlet extends HttpServlet {
 
     request.setAttribute("member", member);
     
-    response.setContentType("text/html;charset=UTF-8");
+    request.setAttribute("viewUrl","/member/detail.jsp");
+    
 
-    request.getRequestDispatcher("/member/detail.jsp").include(request, response);
   }
 }

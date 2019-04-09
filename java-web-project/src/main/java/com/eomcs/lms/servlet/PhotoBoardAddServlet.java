@@ -44,8 +44,7 @@ public class PhotoBoardAddServlet extends HttpServlet {
         iocContainer.getBean(LessonService.class);
     List<Lesson> lessons = lessonService.list();
     request.setAttribute("lessons", lessons);
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/photoboard/form.jsp").include(request, response);
+    request.setAttribute("viewUrl", "/photoboard/form.jsp");
   }
 
   @Override
@@ -91,11 +90,11 @@ public class PhotoBoardAddServlet extends HttpServlet {
 
     } else {
       photoBoardService.add(board);
-      response.sendRedirect("list");
+      request.setAttribute("viewUrl", "redirect:list");
       return;
     }
     
-    request.getRequestDispatcher("/error.jsp").forward(request, response);
+
   }
 
 }

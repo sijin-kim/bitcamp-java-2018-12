@@ -27,9 +27,7 @@ public class MemberListServlet extends HttpServlet {
 
     request.setAttribute("list", members);
     
-    response.setContentType("text/html;charset=UTF-8");
-    
-    request.getRequestDispatcher("/member/list.jsp").include(request, response);
+    request.setAttribute("viewUrl", "/member/list.jsp");
     
   }
 

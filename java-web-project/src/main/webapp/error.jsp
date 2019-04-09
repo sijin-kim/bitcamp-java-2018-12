@@ -4,14 +4,12 @@
 <html>
 <head>
 <title>실행 오류</title>
-<meta http-equiv="Refresh" content="2;url=<%=request.getHeader("Referer")%>">
+<meta http-equiv="Refresh" content="2;url=${(empty header.Referer) ? 
+  pageContext.servletContext.contextPath : header.Referer}">
 </head>
 <body>
-<%
-out.flush();
-request.getRequestDispatcher("/header").include(request, response);
-%>
-  <h1><%=request.getAttribute("error.title")%></h1>
-  <p><%=request.getAttribute("error.content")%>
+  <jsp:include page="/header.jsp" />
+  <h1>${requestScope["error.title"]}</h1>
+  <p>${requestScope["error.content"]}</p>
 </body>
 </html>

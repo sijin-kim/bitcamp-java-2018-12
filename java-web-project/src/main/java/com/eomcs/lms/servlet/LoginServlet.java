@@ -23,27 +23,9 @@ public class LoginServlet extends HttpServlet {
       HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
-    // 도대체 어느 페이지에서 이리로 보냈나?
-    // => 요청 헤더 Referer의 값을 세션에 보관한다.
-    //    로그인을 처리할 때 해당 페이지로 리다이렉트 할 것이다.
-    // => 웹 브라우저의 주소 창에 직접 URL을 지정한 경우에는 
-    //    요청 헤더에 Referer가 없다. 
-    // 
     HttpSession session = request.getSession();
     session.setAttribute(REFERER_URL, request.getHeader("Referer"));
     
-    // 이메일 쿠키 값을 꺼내온다.
-    Cookie[] cookies = request.getCookies();
-    String email = "";
-    if (cookies != null) {
-      for (Cookie c : cookies) {
-        if (c.getName().equals("email")) {
-          email = c.getValue();
-          break;
-        }
-      }
-    }
-    request.setAttribute("email", email);
     response.setContentType("text/html;charset=UTF-8");
     request.getRequestDispatcher("/auth/form.jsp").include(request, response);
   }
@@ -91,8 +73,6 @@ public class LoginServlet extends HttpServlet {
     // 로그인 성공하면 다시 메인 화면으로 보낸다.
     String refererUrl = (String) session.getAttribute(REFERER_URL);
     if (refererUrl == null) {
-      
-      
       response.sendRedirect(getServletContext().getContextPath());
     } else {
       response.sendRedirect(refererUrl);
