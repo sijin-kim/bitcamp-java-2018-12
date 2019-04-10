@@ -9,12 +9,6 @@
 <body>
   <jsp:include page="/header.jsp" />
   <h1>사진 검색(JSP2 + EL + JSTL)</h1>
-  <p>
-    <a href='add'>새 사진</a>
-  </p>
-  <p>
-    <a href='../'>시스템 목록</a>
-  </p>
   <table border='1'>
     <tr>
       <th>번호</th>
@@ -33,6 +27,9 @@
     </tr>
   </c:forEach>
   </table>
+  <p>
+    <a href='list'>목록</a>
+  </p>
 </body>
 </html>
 
