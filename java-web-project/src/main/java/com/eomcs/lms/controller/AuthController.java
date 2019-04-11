@@ -1,13 +1,13 @@
 package com.eomcs.lms.controller;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import com.eomcs.lms.context.RequestMapping;
-import com.eomcs.lms.context.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
@@ -20,10 +20,10 @@ public class AuthController {
   @Autowired ServletContext servletContext;
   
   @RequestMapping("/auth/form")
-  public String form(HttpServletRequest request,
+  public String form(
+      @RequestHeader("Referer") String refererUrl,
       HttpSession session) {
-    
-    session.setAttribute(REFERER_URL, request.getHeader("Referer"));
+    session.setAttribute(REFERER_URL, refererUrl);
     return "/auth/form.jsp";
   }
   
@@ -31,13 +31,14 @@ public class AuthController {
   public String login(
       @RequestParam("email") String email,
       @RequestParam("password") String password,
-      @RequestParam("saveEmail") String saveEmail,
+      @RequestParam("saveEmail") String saveemail,
+      
       HttpSession session,
       HttpServletResponse response) throws Exception {
 
     // 이메일 저장을 처리한다. 
     Cookie cookie;
-    if (saveEmail != null) {
+    if (saveemail != null) {
       cookie = new Cookie("email", email);
       cookie.setMaxAge(60 * 60 * 24 * 15); // 15일간 쿠키를 보관한다.
       
@@ -71,7 +72,7 @@ public class AuthController {
   @RequestMapping("/auth/logout")
   public String logout(HttpSession session) throws Exception {
     session.invalidate();
-    return "redirect:" + servletContext.getContextPath();
+    return "redirect:../../";
   }
 }
 
