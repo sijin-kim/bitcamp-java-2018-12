@@ -1,0 +1,37 @@
+// Gradle에 플러그인 추가한다. 
+plugins {
+    id 'java'   // 자바 빌드 명령을 사용할 수 있다.
+
+   id 'eclipse-wtp' // 자바 웹 프로젝트 플러그인.
+   id 'war'
+}
+
+// 자바 프로그램에서 사용하는 외부 라이브러리의 저장소 
+repositories {
+    jcenter()  // jcenter에서 라이브러리를 다운로드 받는다.
+}
+
+
+// 프로젝트에서 사용할 외부 라이브러리 정보 
+dependencies {
+    // MariaDB JDBC Driver
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.0'
+    
+    implementation 'com.google.guava:guava:26.0-jre'
+    testImplementation 'junit:junit:4.12'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.5.0'
+   // compile group: 'org.springframework', name: 'spring-context', version: '5.1.5.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.6.RELEASE'
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.0'
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.6.RELEASE'
+     compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
+     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+     
+    
+}
+
+
+

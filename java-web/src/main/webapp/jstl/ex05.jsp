@@ -35,7 +35,6 @@ var 속성으로 변수이름을 설정하면, 조건문의 테스트 결과는 
 </pre>
 <c:if test="${gender == 'woman'}" var="r1"/>
 
-
 ${pageScope.r1 ? "여성" : "남성"}<br>
 
 </body>

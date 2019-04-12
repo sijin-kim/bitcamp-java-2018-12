@@ -34,7 +34,7 @@ public class Servlet01 extends HttpServlet {
     //    이 고유 번호를 '세션 아이디'라 부른다.
     // => 웹 브라우저는 세션 아이디를 보관해 두었다가 그 서버에 요청할 때 마다 
     //    세션 아이디를 보낸다. 
-    //    왜? 세션 아이디는 쿠키이다.
+    //    왜? 세셔 아이디는 쿠키이다.
     // => 세션 아이디 쿠키는 유효기간을 설정하지 않았기 때문에 
     //    웹 브라우저를 종료하면 세션 아이디 쿠키는 삭제된다.
     // => 세션 아이디 쿠키의 사용 범위는 웹 애플리케이션이다.
@@ -71,9 +71,6 @@ Date: Wed, 03 Apr 2019 02:38:40 GMT
     
     // 세션에 데이터 보관하기
     session.setAttribute("v1", "aaa");
-    
-
-
     
     response.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = response.getWriter();

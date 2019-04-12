@@ -63,9 +63,7 @@ public class BoardController {
   }
   
   @RequestMapping("/board/update")
-  public String update(
-      Board board) throws Exception {
-    
+  public String update(Board board) throws Exception {
     if (boardService.update(board) == 0) 
       throw new Exception("해당 번호의 게시물이 없습니다.");
       

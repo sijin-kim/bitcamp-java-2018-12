@@ -31,7 +31,6 @@ PageContext 보관소 : ${pageScope.name}<br>
 ServletRequest 보관소 : ${requestScope.name}<br>
 HttpSession  보관소 : ${sessionScope.name}<br>
 ServletContext 보관소 : ${applicationScope.name}<br>
-
 </body>
 </html>
 

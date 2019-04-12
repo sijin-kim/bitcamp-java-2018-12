@@ -4,17 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>jsp구동원리</title>
+<title>ex02</title>
 </head>
 <body>
-<h1>템플릿 데이터</h1>
+<h1>템플릿 데이터(template data)</h1>
 <pre>
--jsp 파일에 그냥 작성하는 텍스는 자바 출력코드를 생성한다.
+- JSP 파일에 그냥 작성하는 텍스트는 자바 출력 코드를 생성한다.
 - 예) 
- out.write("템플릿 데이터")
- out.print("템플릿 데이터")
-
-
+  out.write("템플릿 데이터")
+  out.print("템플릿 데이터")
 </pre>
 </body>
 </html>

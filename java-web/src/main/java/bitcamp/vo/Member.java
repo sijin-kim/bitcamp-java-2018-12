@@ -1,7 +1,6 @@
 package bitcamp.vo;
 
 public class Member {
-
   protected int no;
   protected String name;
   protected String email;
@@ -38,7 +37,5 @@ public class Member {
   public void setPassword(String password) {
     this.password = password;
   }
-  
-  
   
 }

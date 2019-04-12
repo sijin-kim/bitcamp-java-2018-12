@@ -48,8 +48,7 @@ Cookie: JSESSIONID=9909D09693CE9E0B8D23BE824313C834    <--- 서버에 세션 아
     //    따라서 새 세션에는 v1 이라는 이름으로 저장된 값이 없기 때문에 
     //    null을 출력할 것이다.
     //
-   // out.printf("v1=%s\n", session.getAttribute("v1"));
-    out.printf("v1 =%s\n", session.getAttribute("v1"));
+    out.printf("v1=%s\n", session.getAttribute("v1"));
   }
 }
 

@@ -34,10 +34,6 @@ public class Servlet22 extends HttpServlet {
         out.printf("%s=%s\n", c.getName(), c.getValue());
       }
     }
-  
-      
-    
-    
     
   }
 }

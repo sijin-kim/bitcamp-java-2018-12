@@ -31,10 +31,8 @@ public class PhotoBoardController {
   }
   
   @RequestMapping("/photoboard/add")
-  public String add(
-    PhotoBoard board,
+  public String add(PhotoBoard board,
       @RequestParam("photo") Part[] photos) throws Exception {
-
 
     ArrayList<PhotoFile> files = new ArrayList<>();
     
@@ -117,10 +115,8 @@ public class PhotoBoardController {
   }
   
   @RequestMapping("/photoboard/update")
-  public String update(
-      PhotoBoard board,
+  public String update(PhotoBoard board,
       @RequestParam("photo") Part[] photos) throws Exception {
-
 
     ArrayList<PhotoFile> files = new ArrayList<>();
     String uploadDir = servletContext.getRealPath("/upload/photoboard");

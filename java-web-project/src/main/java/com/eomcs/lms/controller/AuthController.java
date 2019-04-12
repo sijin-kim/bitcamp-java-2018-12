@@ -31,14 +31,13 @@ public class AuthController {
   public String login(
       @RequestParam("email") String email,
       @RequestParam("password") String password,
-      @RequestParam("saveEmail") String saveemail,
-      
+      @RequestParam("saveEmail") String saveEmail,
       HttpSession session,
       HttpServletResponse response) throws Exception {
 
     // 이메일 저장을 처리한다. 
     Cookie cookie;
-    if (saveemail != null) {
+    if (saveEmail != null) {
       cookie = new Cookie("email", email);
       cookie.setMaxAge(60 * 60 * 24 * 15); // 15일간 쿠키를 보관한다.
       
