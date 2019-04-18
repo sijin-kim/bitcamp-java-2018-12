@@ -1,4 +1,4 @@
-// 파라미터 이름으로 request handler 구분하기
+// request handler를 구분하는 방법 - 파라미터 이름으로 구분하기
 package bitcamp.app1;
 
 import org.springframework.stereotype.Controller;
@@ -12,22 +12,23 @@ public class Controller03_1 {
 
   // 테스트 방법:
   // => http://localhost:8080/java-spring-webmvc/app1/c03_1?name=kim
-  
-  @GetMapping(params="name") // GET 요청일 때만 호출된다. 
+  @GetMapping(params="name") 
   @ResponseBody 
   public String handler1() {
     return "handler1";
   }
-  // 테스트 방법:
+  
+  //테스트 방법:
   // => http://localhost:8080/java-spring-webmvc/app1/c03_1?age=20
-  @GetMapping(params="age") // POST 요청일 때만 호출된다. 
+  @GetMapping(params="age") 
   @ResponseBody 
   public String handler2() {
     return "handler2";
   }
-  // 테스트 방법:
+  
+  //테스트 방법:
   // => http://localhost:8080/java-spring-webmvc/app1/c03_1?name=kim&age=20
-  @GetMapping(params= {"age","name"}) // POST 요청일 때만 호출된다. 
+  @GetMapping(params={"age","name"}) 
   @ResponseBody 
   public String handler3() {
     return "handler3";

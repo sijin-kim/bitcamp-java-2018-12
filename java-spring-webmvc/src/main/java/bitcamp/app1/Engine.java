@@ -1,9 +1,8 @@
 package bitcamp.app1;
 
 public class Engine {
-
   protected String model;
-  protected int  cc;
+  protected int cc;
   protected int valve;
   
   @Override
@@ -12,7 +11,6 @@ public class Engine {
   }
   public String getModel() {
     return model;
-    
   }
   public void setModel(String model) {
     this.model = model;
@@ -29,5 +27,6 @@ public class Engine {
   public void setValve(int valve) {
     this.valve = valve;
   }
+  
   
 }

@@ -1,4 +1,4 @@
-// GET, POST 구분하기
+// GET, POST 구분하기 II
 package bitcamp.app1;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class Controller02_2 {
     return "get";
   }
   
-  @PostMapping// GET 요청일 때만 호출된다. 
+  @PostMapping // POST 요청일 때만 호출된다. 
   @ResponseBody 
   public String handler2() {
     return "post";
