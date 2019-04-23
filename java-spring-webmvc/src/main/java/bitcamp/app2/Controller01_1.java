@@ -17,9 +17,8 @@ public class Controller01_1 {
   @GetMapping("h1") 
   public String handler1(Model model) {
     
-    model.addAttribute("name","김시진");
-    model.addAttribute("age",20);
-
+    model.addAttribute("name", "홍길동");
+    model.addAttribute("age", 20);
     
     // InternalResourceViewResolver를 사용하여 
     // JSP URL의 접두어와 접미사를 미리 설정해 둘 수 있다.
@@ -62,10 +61,9 @@ public class Controller01_1 {
   @GetMapping("h3") 
   public Map<String,Object> handler3() {
     
-  HashMap<String ,Object> map = new HashMap<>();
-  map.put("name", "홍길동");
-  map.put("age", 20);
-  
+    HashMap<String,Object> map = new HashMap<>();
+    map.put("name", "홍길동3");
+    map.put("age", 40);
     
     // Map 객체에 값을 담아 리턴하면 
     // 프론트 컨트롤러는 Map 객체에 보관되어 있는 값들을 ServletRequest 보관소로 옮긴다.

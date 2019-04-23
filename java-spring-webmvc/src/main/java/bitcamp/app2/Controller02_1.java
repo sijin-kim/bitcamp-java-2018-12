@@ -23,7 +23,7 @@ public class Controller02_1 {
     //    아규먼트를 선언하면 된다.
     //    아규먼트 앞에 @RequestParam을 붙여도 되고 
     //    아규먼트이 이름이 요청 파라미터의 이름과 같다면 @RequestParam을 생략해도 된다.
-    return String.format("name=%s,age=%d", name,age);
+    return String.format("name=%s, age=%d", name, age);
   }
 
   // 테스트:
@@ -51,7 +51,7 @@ public class Controller02_1 {
  
   // 테스트:
   //   http://localhost:8080/java-spring-webmvc/app2/c02_1/kim_20
-  @GetMapping("{name},{age}")
+  @GetMapping("{name}_{age}")
   @ResponseBody
   public String handler3(
       @PathVariable("name") String name,
