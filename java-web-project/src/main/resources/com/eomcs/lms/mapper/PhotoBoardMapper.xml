@@ -63,6 +63,9 @@
     </where>
     order by 
       photo_id desc
+      <if test="size != null || rowNo != null">
+       limit #{rowNo}, #{size}
+      </if>
   </select>
   
   <select id="findByNo" resultMap="photoBoardMap" parameterType="int">
@@ -122,6 +125,10 @@
     delete from lms_photo 
     where photo_id = #{value}
   </delete>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from lms_photo
+  </select>
 </mapper>
 
 

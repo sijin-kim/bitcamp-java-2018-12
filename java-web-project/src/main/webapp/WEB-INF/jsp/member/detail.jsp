@@ -4,14 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="${contextRootPath}/css/common.css">
 <title>회원 조회</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="${contextRootPath}/css/common.css">
 </head>
 <body>
 
   <jsp:include page="../header.jsp" />
-  
 <div class="container">
   <h1>회원 조회</h1>
 <c:choose>
@@ -31,34 +30,31 @@
   
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">이름</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="name" 
-             name='name' value='${member.name}' readonly>
+    <div class="col-sm-8">
+      <input class="form-control" id="name" 
+                name='name' value="${member.name}"/>
     </div>
   </div>
   
   <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">이메일</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="email" 
-             name='email' value='${member.email}' readonly>
+    <div class="col-sm-8">
+      <input class="form-control" id="email" 
+                name='email' value="${member.email}"/>
     </div>
   </div>
   
   <div class="form-group row">
     <label for="password" class="col-sm-2 col-form-label">암호</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control-plaintext" id="password" 
-             name='password' value='${member.password}' readonly>
+    <div class="col-sm-8">
+      <input class="form-control" id="password" 
+                name='password' type="password"/>
     </div>
   </div>
   
-  
   <div class="form-group row">
     <label for="photoFile" class="col-sm-2 col-form-label">사진</label>
-    <div class="col-sm-10">
-      <input type="file" class="form-control-plaintext" id="photoFile" 
-             name='photoFile' value='${member.photo}'>
+    <div class="col-sm-8">
       <c:set var="contextRootPath" value="${pageContext.servletContext.contextPath}"></c:set>
       <c:if test="${empty member.photo}">
           <img src='${contextRootPath}/images/default.jpg' style='height: 80px'><br>
@@ -66,37 +62,38 @@
       <c:if test="${not empty member.photo}">
           <img src='${contextRootPath}/upload/member/${member.photo}' style='height: 80px'><br>
       </c:if>
-    </div>
-  </div>
-     
-     <div class="form-group row">
-    <label for="tel" class="col-sm-2 col-form-label">전화</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control-plaintext" id="tel" 
-             name='tel' value='${member.tel}' readonly>
+        <input class="form-control" type='file' id='photoFile' name='photoFile'>
     </div>
   </div>
   
-   <div class="form-group row">
-    <label for="registeredDate" class="col-sm-2 col-form-label">가입일</label>
-    <div class="col-sm-10">
-      <input type="Date" class="form-control-plaintext" id="tel" 
-             name='registeredDate' value='${member.registeredDate}' readonly>
+  <div class="form-group row">
+    <label for="tel" class="col-sm-2 col-form-label">전화</label>
+    <div class="col-sm-8">
+      <input class="form-control" id="tel" 
+                name='tel' value="${member.tel}"/>
     </div>
   </div>
-     
-     <div class="form-group row">
+  
+  <div class="form-group row">
+    <label for="registeredDate" class="col-sm-2 col-form-label">가입일</label>
+    <div class="col-sm-8">
+      <input class="form-control" id="registeredDate" 
+                 value="${member.registeredDate}"/>
+    </div>
+  </div>
+  
+  <div class="form-group row">
     <div class="col-sm-10">
       <a class="btn btn-primary" href='.'>목록</a> 
       <a class="btn btn-primary" href='delete/${member.no}'>삭제</a> 
       <button class="btn btn-primary">변경</button>
     </div>
   </div>
-    
- 
+      
   </form>
 </c:otherwise>
 </c:choose>
+
 </div><!-- .container -->
 
 <jsp:include page="../javascript.jsp"/>

@@ -5,7 +5,7 @@
 <html>
 <head>
   <title>게시물 조회</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="${contextRootPath}/css/common.css">
 </head>
 <body>
@@ -27,7 +27,6 @@
              name='no' value='${board.no}' readonly>
     </div>
   </div>
-  
   <div class="form-group row">
     <label for="contents" class="col-sm-2 col-form-label">내용</label>
     <div class="col-sm-8">
@@ -49,7 +48,6 @@
           id="viewCount" value="${board.viewCount}">
     </div>
   </div>
-  
   <div class="form-group row">
     <div class="col-sm-10">
       <a class="btn btn-primary" href='.'>목록</a> 
@@ -57,6 +55,7 @@
       <button class="btn btn-primary">변경</button>
     </div>
   </div>
+  
   </form>
 </c:otherwise>
 </c:choose>
