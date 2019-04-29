@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,31 +18,35 @@
 //    그래서 이런 경우를 방지하고자, 
 //    클로저에서 사용하는 바깥 함수의 로컬 변수는 클로저의 별도 메모리에 복제된다.
 //
-// 
+//
 
-function createGreeting(name){
-	ver message = name +  "님 반가습니다.";
-	
-	
-	ver f = function(){
-		console.log(message);
-	};
-	return f;// 클로저에서 바깥 함수 변수를 사용하기
-	
+function createGreeting(name) {
+  var message = name + "님 반갑습니다!";
+  
+  // 클로저 만들기
+  var f = function() {
+    console.log(message); // 클로저에서 바깥 함수의 변수를 사용하기
+  };
+  
+  return f;
 }
 
-var test1= createGreeting("홍길동");
-var test2= createGreeting("임꺾정");
-
+var test1 = createGreeting("홍길동");
+var test2 = createGreeting("임꺽정");
 
 test1();
 test2();
-
 
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
 
 
 

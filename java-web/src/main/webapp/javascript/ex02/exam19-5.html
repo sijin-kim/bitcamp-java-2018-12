@@ -43,8 +43,28 @@ console.log("-----------------")
 for (var [key, value] of obj2) { 
     console.log(key, "=", value);
 }
+console.log("-----------------@@@@@")
+var b4 = new Map();
+b4.set("name","김시진");
+b4.set("age",15);
+b4.set("email","tlwls@naver.com");
 
 
+for(var u of b4){
+	console.log(u);
+	console.log(u[0],"=",u[1]);
+}
+
+
+var zz = new Map();
+zz.set("name","둘리");
+zz.set("age",15);
+zz.set("email","tltltltl");
+
+for(var[key,value] of zz){
+	console.log(key,"=",value);
+	
+}
 
 
 

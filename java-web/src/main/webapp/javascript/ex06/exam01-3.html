@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>이벤트 - 리스너 실행 순서</h1>
-<button id="btn1" onclick="var str='Hello'; window.alert(str);">버튼1</button><br>
+<button id="btn1" onclick="var str='Hello1'; window.alert(str);">버튼1</button><br>
 
 <script>
 "use strict"
@@ -23,15 +23,19 @@
 //
 var btn1 = document.querySelector("#btn1");
 
+//
 btn1.addEventListener("click", () => {
     var str = "Hello3";
     window.alert(str);
 });
+
+
+// 태그의 onclick 속성 값을 설정했다면 그 값을 대체한다.
+// 
 btn1.onclick = () => {
     var str = "Hello2";
     window.alert(str);
 };
-
 
 
 
