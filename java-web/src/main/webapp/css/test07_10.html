@@ -18,6 +18,7 @@
   }
 
   #state {
+    /* border: 1px solid red; */
     font-family: myfont; /* OS에 설치된 폰트가 아니라 외부에서 다운받은 폰트*/
     position: relative;
     top: 3px;
@@ -33,7 +34,7 @@
 <body>
 <form>
 <div id="d1">이메일: <input id="email" type="text">
-  <div id="state"></div></div>
+  <div id="state">홍</div></div>
 <div>암호: <input id="pwd" type="password"></div>
 <div><button id="signupBtn" type="button">회원가입</button></div>
 </form>
@@ -50,7 +51,11 @@ btn.addEventListener('click', function() {
   // 입력 상자에 들어있는 값을 검사하여 이메일 중복 여부에 따라
   // 아이콘을 출력한다.
   if (email.value == "hong@test.com") { // 존재하는 사용자일 경우
-    state.innerHTML = "&#61453;";
+    //state.innerHTML = "가";
+    //state.innerHTML = "\uac01"; // 이스케이프(escape) 문자를 사용하여 지정하기
+    //state.innerHTML = "&#xac02;"; // HTML에 미리 정의된 상수 값(html character entity)
+    //state.innerHTML = "&#44036;"; // 10진수 html character entity 값
+    state.innerHTML = "&#61453;"; // 
     state.style["color"] = "#ff0000";
   } else {
     state.innerHTML = "&#61452;";

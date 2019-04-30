@@ -47,9 +47,6 @@ Score.prototype.sum = function() {
 Score.prototype.aver = function() { 
     return this.sum() / 3
 }
-Score.prototype.minus=function(){
-	return this.kor - this.eng - this.math
-}
 
 
 var scores = []; //new Array();
@@ -67,7 +64,7 @@ for (var score of scores) {
     // 3) 없으면 상위 생성자의 prototype 저장소에서 찾는다.
     // 4) 그래도 없으면 실행 오류!
     console.log(score.name, score.kor, score.eng, score.math, 
-    		score.sum(), score.aver(),score.minus());
+    		score.sum(), score.aver());
 }
 
 // 없는 함수를 호출해 보자!
