@@ -1,6 +1,5 @@
 package com.eomcs.lms.web;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
 
@@ -43,60 +41,31 @@ public class MemberController {
   }
   
   @GetMapping("delete/{no}")
-  public String delete(
-      @PathVariable int no) throws Exception {
+  public String delete(@PathVariable int no) {
 
     if (memberService.delete(no) == 0) 
-      throw new Exception("해당 번호의 회원이 없습니다.");
-    
+      throw new RuntimeException("해당 번호의 회원이 없습니다.");
     return "redirect:../";
   }
   
   @GetMapping("{no}")
-  public String detail(@PathVariable int no, Map<String,Object> map) throws Exception {
-
+  public String detail(@PathVariable int no, Model model) {
     Member member = memberService.get(no);
-    map.put("member", member);
+    model.addAttribute("member", member);
     return "member/detail";
   }
   
   @GetMapping
-  public String list(
-      @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="3") int pageSize,
-      Model model) throws Exception {
-    
-    if (pageSize < 3 || pageSize > 8)
-      pageSize = 3;
-    
-    int rowCount = memberService.size();
-    int totalPage = rowCount / pageSize;
-    if (rowCount % pageSize > 0)
-      totalPage++;
-    
-    if (pageNo < 1)
-      pageNo = 1;
-    else if (pageNo > totalPage)
-      pageNo = totalPage;
-
-    List<Member> members = memberService.list(null, pageNo, pageSize);
+  public String list(Model model) {
+    List<Member> members = memberService.list(null);
     model.addAttribute("list", members);
-    model.addAttribute("pageNo", pageNo);
-    model.addAttribute("pageSize", pageSize);
-    model.addAttribute("totalPage", totalPage);
-    model.addAttribute("rowCount", rowCount);
-    
     return "member/list";
   }
   
   @GetMapping("search")
-  public void search(
-      @RequestParam("keyword") String keyword,
-      Map<String,Object> map) throws Exception {
-   
-    List<Member> members = memberService.list(keyword,0,0);
-    map.put("list", members);
-    
+  public void search(String keyword, Model model) {
+    List<Member> members = memberService.list(keyword);
+    model.addAttribute("list", members);
   }
 
   @PostMapping("update")
@@ -110,7 +79,7 @@ public class MemberController {
     }
 
     if (memberService.update(member) == 0)
-      throw new Exception("해당 번호의 회원이 없습니다.");
+      throw new RuntimeException("해당 번호의 회원이 없습니다.");
       
     return "redirect:.";
   }

@@ -50,7 +50,7 @@
     
     <mvc:interceptor>
       <mvc:mapping path="/c04_1/**"/> 
-
+      
       <!-- 특정 URL은 제외하기 -->
       <mvc:exclude-mapping path="/c04_1/a/**"/>
       

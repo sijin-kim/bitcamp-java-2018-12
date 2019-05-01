@@ -12,5 +12,4 @@ public interface PhotoBoardDao {
   int increaseCount(int no);
   int update(PhotoBoard photoBoard);
   int delete(int no);
-  int countAll();
 }

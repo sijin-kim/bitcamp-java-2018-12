@@ -5,14 +5,17 @@
 <head>
   <meta http-equiv="Refresh" content="2;url=form">
   <title>로그인 실패</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${contextRootPath}/css/common.css">
+  <jsp:include page="../commonCss.jsp"/>
 </head>
 <body>
 
 <jsp:include page="../header.jsp"/>
 
+<div class="container">
 <h1>로그인 실패</h1>
-<h6>이메일 또는 암호가 맞지 않습니다.</h6>
+<p>이메일 또는 암호가 맞지 않습니다.</p>
+</div>
+
+<jsp:include page="../javascript.jsp"/>
 </body>
 </html>

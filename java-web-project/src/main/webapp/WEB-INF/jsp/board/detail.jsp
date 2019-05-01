@@ -5,8 +5,7 @@
 <html>
 <head>
   <title>게시물 조회</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${contextRootPath}/css/common.css">
+  <jsp:include page="../commonCss.jsp"/>
 </head>
 <body>
 
@@ -55,7 +54,6 @@
       <button class="btn btn-primary">변경</button>
     </div>
   </div>
-  
   </form>
 </c:otherwise>
 </c:choose>

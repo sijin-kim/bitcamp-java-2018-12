@@ -18,33 +18,29 @@ public class BoardController {
   
   @Autowired BoardService boardService;
   
-  @RequestMapping("form")
-  public void form() throws Exception {
+  @GetMapping("form")
+  public void form() {
   }
   
   @PostMapping("add")
-  public String add(Board board) throws Exception {
-    
+  public String add(Board board) {
     boardService.add(board);
-    
     return "redirect:.";
   }
   
   @GetMapping("delete/{no}")
-  public String delete(@PathVariable int no) throws Exception {
+  public String delete(@PathVariable int no) {
   
     if (boardService.delete(no) == 0) 
-      throw new Exception("해당 번호의 게시물이 없습니다.");
+      throw new RuntimeException("해당 번호의 게시물이 없습니다.");
     
     return "redirect:../";
   }
   
   @GetMapping("{no}")
-  public String detail(@PathVariable int no, Model model) throws Exception {
-
+  public String detail(@PathVariable int no, Model model) {
     Board board = boardService.get(no);
     model.addAttribute("board", board);
-    
     return "board/detail";
   }
   
@@ -52,9 +48,9 @@ public class BoardController {
   public String list(
       @RequestParam(defaultValue="1") int pageNo,
       @RequestParam(defaultValue="3") int pageSize,
-      Model model) throws Exception {
+      Model model) {
     
-    if (pageSize < 3 || pageSize > 8)
+    if (pageSize < 3 || pageSize > 8) 
       pageSize = 3;
     
     int rowCount = boardService.size();
@@ -62,7 +58,7 @@ public class BoardController {
     if (rowCount % pageSize > 0)
       totalPage++;
     
-    if (pageNo < 1)
+    if (pageNo < 1) 
       pageNo = 1;
     else if (pageNo > totalPage)
       pageNo = totalPage;
@@ -72,16 +68,14 @@ public class BoardController {
     model.addAttribute("pageNo", pageNo);
     model.addAttribute("pageSize", pageSize);
     model.addAttribute("totalPage", totalPage);
-    model.addAttribute("rowCount", rowCount);
     
     return "board/list";
   }
   
   @PostMapping("update")
-  public String update(Board board) throws Exception {
+  public String update(Board board) {
     if (boardService.update(board) == 0) 
-      throw new Exception("해당 번호의 게시물이 없습니다.");
-      
+      throw new RuntimeException("해당 번호의 게시물이 없습니다.");
     return "redirect:.";
   }
 }
