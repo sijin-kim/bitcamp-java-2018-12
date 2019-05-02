@@ -45,6 +45,8 @@ document.querySelector("#btn1").onclick = () => {
         	  // 먼저 클릭 이벤트 객체를 만든다.
         	  var e = new MouseEvent("click");
         	  
+  
+        	  
         	  // 그리고 클릭 이벤트 객체를 reset 버튼에 보낸다.
         	  // => 그러면 reset 버튼에 대해 click 이벤트가 발생된다.
         	  document.querySelector("#btn2").dispatchEvent(e);
