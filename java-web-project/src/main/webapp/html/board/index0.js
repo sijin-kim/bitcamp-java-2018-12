@@ -3,15 +3,10 @@ var pageNo = 1,
     tbody = $('tbody'),
     prevPageLi = $('#prevPage'),
     nextPageLi = $('#nextPage'),
-    currSpan = $('#currPage > span'),
-    templateSrc = $('#tr-template').html();  // script 태그에서 탬플릿 데이터를 꺼낸다.
-
-// handlerbars를 사용하여 템플릿 데이터를 가지고 최종 결과를 생성할 함수를 준비한다.
-var trGenerator= Handlebars.compile(templateSrc);
+    currSpan = $('#currPage > span');
 
 // JSON 형식의 데이터 목록 가져오기
 function loadList(pn) {
-	
   
   $.getJSON('../../app/json/board/list?pageNo=' + pn + '&pageSize=' + pageSize, 
     function(obj) {
@@ -20,12 +15,19 @@ function loadList(pn) {
       
       // TR 태그를 생성하여 테이블 데이터를 갱신한다.
       tbody.html(''); // 이전에 출력한 내용을 제거한다.
-     
-      // 템플릿 엔진을 실행하여 tr태그 목록을 생성한다.
-        $(trGenerator(obj)).appendTo(tbody);
+      for (data of obj.list) {
+        $('<tr>')
+          .append($('<th>').attr('scope', 'row').html(data.no))
+          .append($('<td>').append(
+                    $('<a>').addClass('bit-view-link')
+                      .attr('href', '#')
+                      .attr('data-no', data.no)
+                      .html(data.contents)))
+          .append($('<td>').html(data.createdDate))
+          .append($('<td>').html(data.viewCount))
+          .appendTo(tbody);
+      }
       
-   
-     
       // 현재 페이지의 번호를 갱신한다.
       currSpan.html(String(pageNo));
       
